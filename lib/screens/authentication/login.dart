@@ -264,7 +264,9 @@ class _LoginState extends State<Login> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/profile');
+                },
                 label: const Text(
                   'Login',
                   style: TextStyle(

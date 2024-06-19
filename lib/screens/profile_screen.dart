@@ -98,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             curve: Curves.easeInOut,
                           );
                         } else {
-                          // Handle the end of questions
+                          Navigator.pushReplacementNamed(context, '/starting');
                         }
                       },
                       child:

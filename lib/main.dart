@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:one_at_a_time/screens/starting_screen.dart';
+import './screens/main/todo/todo_screen.dart';
 import './screens/onboarding_screen.dart';
 import './screens/welcome_screen.dart';
 import './screens/authentication/login.dart';
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/signup': (context) => SignUp(),
         '/profile': (context) => ProfileScreen(),
+        '/starting': (context) => StartingScreen(),
+        '/main': (context) => ToDoScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
