@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import '../main_screen.dart'; 
 import '../mood_track/mood_track_screen.dart';
+import '../user_profile/user_profile_screen.dart';
+import '../reflect/reflect_screen.dart';
 
 class ToDoScreen extends StatefulWidget {
   const ToDoScreen({super.key});
@@ -80,8 +82,8 @@ class _ToDoScreenState extends State<ToDoScreen> {
     MainContent(
         tasks: [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
     MoodTrackScreen(),
-    Text('Reflect'),
-    Text('Profile'),
+    ReflectScreen(),
+    UserProfileScreen(),
   ];
 }
 
