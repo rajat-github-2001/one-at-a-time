@@ -1,6 +1,6 @@
 // main_screen.dart
 import 'package:flutter/material.dart';
-import '../main_screen.dart'; 
+import '../main_screen.dart';
 import '../mood_track/mood_track_screen.dart';
 import '../user_profile/user_profile_screen.dart';
 import '../reflect/reflect_screen.dart';
@@ -57,33 +57,35 @@ class _ToDoScreenState extends State<ToDoScreen> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
-      floatingActionButton: _selectedIndex == 0 ? FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AddTaskDialog(
-                onTaskAdded: _addTask,
-              );
-            },
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: Color(0XFF3B3EDE),
-      ) : null,
+      floatingActionButton: _selectedIndex == 0
+          ? FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AddTaskDialog(
+                      onTaskAdded: _addTask,
+                    );
+                  },
+                );
+              },
+              backgroundColor: const Color(0XFF3B3EDE),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+            )
+          : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     MainContent(
-        tasks: [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
-    MoodTrackScreen(),
-    ReflectScreen(),
-    UserProfileScreen(),
+        tasks: const [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
+    const MoodTrackScreen(),
+    const ReflectScreen(),
+    const UserProfileScreen(),
   ];
 }
 
@@ -200,9 +202,9 @@ class MainContent extends StatelessWidget {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-              color: isSelected ? Color(0XFF3B3EDE) : Colors.transparent,
+              color: isSelected ? const Color(0XFF3B3EDE) : Colors.transparent,
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
             children: [
               Text(
@@ -231,12 +233,12 @@ class MainContent extends StatelessWidget {
       child: ListTile(
         leading: Text(
           task.emoji,
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
         trailing: IconButton(
           icon: task.isCompleted
-              ? Icon(Icons.check_circle, color: Colors.green)
-              : Icon(Icons.radio_button_unchecked),
+              ? const Icon(Icons.check_circle, color: Colors.green)
+              : const Icon(Icons.radio_button_unchecked),
           onPressed: () {
             toggleTaskCompletion(index);
           },
@@ -276,21 +278,21 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Add Task'),
+      title: const Text('Add Task'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
             controller: _titleController,
-            decoration: InputDecoration(labelText: 'Title'),
+            decoration: const InputDecoration(labelText: 'Title'),
           ),
           TextField(
             controller: _subtitleController,
-            decoration: InputDecoration(labelText: 'Subtitle'),
+            decoration: const InputDecoration(labelText: 'Subtitle'),
           ),
           TextField(
             controller: _emojiController,
-            decoration: InputDecoration(labelText: 'Emoji'),
+            decoration: const InputDecoration(labelText: 'Emoji'),
           ),
         ],
       ),
@@ -299,7 +301,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () {
@@ -311,7 +313,7 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
             widget.onTaskAdded(task);
             Navigator.of(context).pop();
           },
-          child: Text('Add'),
+          child: const Text('Add'),
         ),
       ],
     );
