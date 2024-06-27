@@ -69,8 +69,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             width: 85,
             height: 4,
             decoration: BoxDecoration(
-              color:
-                  index <= _currentPageIndex ? const Color(0XFF3B3EDE) : Colors.white,
+              color: index <= _currentPageIndex
+                  ? const Color(0XFF3B3EDE)
+                  : Colors.white,
             ),
           );
         }).toList());
@@ -91,12 +92,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             'Next',
             style: TextStyle(color: Colors.white),
           ),
-          style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-              elevation: WidgetStateProperty.all(5),
-              padding: WidgetStateProperty.all(const EdgeInsets.all(20)),
-              shadowColor:
-                  WidgetStateProperty.all(Colors.black.withOpacity(0.5))),
+          style: TextButton.styleFrom(
+              backgroundColor: const Color(0XFF3B3EDE),
+              elevation: 5,
+              padding: const EdgeInsets.all(20),
+              shadowColor: Colors.black.withOpacity(0.5)),
         ));
   }
 

@@ -76,13 +76,11 @@ class _LoginState extends State<Login> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(const Color(0XFFFBFEFB)),
-                    elevation: WidgetStateProperty.all(5),
-                    padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(
-                            horizontal: 37, vertical: 22))),
+                style: TextButton.styleFrom(
+                    backgroundColor: const Color(0XFFFBFEFB),
+                    elevation: 5,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 37, vertical: 22)),
               ),
             ),
             const SizedBox(
@@ -140,8 +138,8 @@ class _LoginState extends State<Login> {
                       fillColor: const Color(0XFFFBFEFB),
                       contentPadding: const EdgeInsets.all(15),
                       hintText: "Type in your username",
-                      hintStyle:
-                          const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                      hintStyle: const TextStyle(
+                          color: Color(0XFF898D9E), fontSize: 14),
                       prefixIcon: const Padding(
                         padding: EdgeInsets.all(16),
                         child: Icon(
@@ -177,8 +175,8 @@ class _LoginState extends State<Login> {
                       fillColor: const Color(0XFFFBFEFB),
                       contentPadding: const EdgeInsets.all(15),
                       hintText: "Place the password here",
-                      hintStyle:
-                          const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                      hintStyle: const TextStyle(
+                          color: Color(0XFF898D9E), fontSize: 14),
                       prefixIcon: const Padding(
                         padding: EdgeInsets.all(16),
                         child: Icon(
@@ -230,7 +228,9 @@ class _LoginState extends State<Login> {
                             _rememberMe
                                 ? Icons.check_box
                                 : Icons.check_box_outline_blank,
-                            color: _rememberMe ? const Color(0XFF3B3EDE) : Colors.white,
+                            color: _rememberMe
+                                ? const Color(0XFF3B3EDE)
+                                : Colors.white,
                           ),
                         ),
                         const SizedBox(
@@ -247,7 +247,7 @@ class _LoginState extends State<Login> {
                       ])),
                   TextButton(
                       onPressed: () {},
-                      child:const Text(
+                      child: const Text(
                         'Forgot your password?',
                         style: TextStyle(
                           color: Color(0XFF3B3EDE),
@@ -279,19 +279,14 @@ class _LoginState extends State<Login> {
                   Icons.arrow_forward,
                   color: Colors.white,
                 ),
-                style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(
-                    const EdgeInsets.symmetric(
+                style: TextButton.styleFrom(
+                    backgroundColor: const Color(0XFF3B3EDE),
+                    elevation: 5,
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 20,
                       vertical: 20,
                     ),
-                  ),
-                  shadowColor: WidgetStateProperty.all(
-                      const Color(0XFF3B3EDE).withOpacity(0.20)),
-                ),
+                    shadowColor: const Color(0XFF3B3EDE).withOpacity(0.20)),
               ),
             ),
             const SizedBox(

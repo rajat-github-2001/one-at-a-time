@@ -27,12 +27,12 @@ void showFinishDialog(BuildContext context) {
             ),
             actions: <Widget>[
               TextButton(
-                style: ButtonStyle(
-                  fixedSize: WidgetStateProperty.all<Size>(Size(120, 48)),
-                  side: WidgetStateProperty.all(BorderSide(
+                style: TextButton.styleFrom(
+                  fixedSize: Size(120, 48),
+                  side: BorderSide(
                     color: Color(0xFF4B4BDD), // Border color
                     width: 1, // Border width
-                  )),
+                  ),
                 ),
                 child: Text(
                   'No.',

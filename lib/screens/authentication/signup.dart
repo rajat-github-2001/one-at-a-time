@@ -76,12 +76,12 @@ class _SignUpState extends State<SignUp> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFFFBFEFB)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(const EdgeInsets.symmetric(
-                      horizontal: 37, vertical: 22))),
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0XFFFBFEFB),
+                elevation: 5,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 37, vertical: 22),
+              ),
             ),
           ),
           const SizedBox(
@@ -247,111 +247,110 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           const SizedBox(
-              height: 24,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ElevatedButton.icon(
-                onPressed: () {},
-                label: const Text(
-                  'Sign up',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                icon: const Icon(
-                  Icons.arrow_forward,
+            height: 24,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ElevatedButton.icon(
+              onPressed: () {},
+              label: const Text(
+                'Sign up',
+                style: TextStyle(
+                  fontSize: 16,
                   color: Colors.white,
-                ),
-                style: ButtonStyle(
-                  backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(
-                    const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                  ),
-                  shadowColor: WidgetStateProperty.all(
-                      const Color(0XFF3B3EDE).withOpacity(0.20)),
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-            const SizedBox(height: 42,),
-            Container(
-              margin: const EdgeInsets.only(top: 16, left: 20, right: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _agree = !_agree;
-                      });
-                    },
-                    child: Icon(
-                      _agree ? Icons.check_box :
-                      Icons.check_box_outline_blank,
-                      color: _agree ? const Color(0XFF3B3EDE) : Colors.white,
-                    ),
-                  ),
-                  const SizedBox(width: 8,),
-                  const Flexible(
-                    child: Text(
-                      'By continuing you accept our Privacy Policy and Term of Use',
-                      style: TextStyle(
-                            color: Color(0XFF0D1B1E),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400,
-                          ),
-                    ),
-                  )
-                ],
+              icon: const Icon(
+                Icons.arrow_forward,
+                color: Colors.white,
+              ),
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0XFF3B3EDE),
+                elevation: 5,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                shadowColor: const Color(0XFF3B3EDE).withOpacity(0.20),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Divider(
-                color: Colors.grey,
-                thickness: 1,
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-           Row(
+          ),
+          const SizedBox(
+            height: 42,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 16, left: 20, right: 20),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Already have an account?",
-                  textAlign: TextAlign.center,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _agree = !_agree;
+                    });
+                  },
+                  child: Icon(
+                    _agree ? Icons.check_box : Icons.check_box_outline_blank,
+                    color: _agree ? const Color(0XFF3B3EDE) : Colors.white,
+                  ),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                const Flexible(
+                  child: Text(
+                    'By continuing you accept our Privacy Policy and Term of Use',
+                    style: TextStyle(
+                      color: Color(0XFF0D1B1E),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Divider(
+              color: Colors.grey,
+              thickness: 1,
+            ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Already have an account?",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
+                child: const Text(
+                  'Login',
                   style: TextStyle(
                     fontSize: 14,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0XFF3B3EDE),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/login');
-                  },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0XFF3B3EDE),
-                    ),
-                  ),
-                ),
-              ],
-            ) 
+              ),
+            ],
+          )
         ],
       ),
     ));

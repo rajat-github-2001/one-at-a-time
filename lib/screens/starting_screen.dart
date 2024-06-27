@@ -76,18 +76,15 @@ class StartingScreen extends StatelessWidget {
                         Icons.arrow_forward,
                         color: Colors.white,
                       ),
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                        elevation: WidgetStateProperty.all(5),
-                        padding: WidgetStateProperty.all(
-                          const EdgeInsets.symmetric(
+                      style: TextButton.styleFrom(
+                          backgroundColor: const Color(0XFF3B3EDE),
+                          elevation: 5,
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 20,
                           ),
-                        ),
-                        shadowColor: WidgetStateProperty.all(
-                            const Color(0XFF3B3EDE).withOpacity(0.20)),
-                      ),
+                          shadowColor:
+                              const Color(0XFF3B3EDE).withOpacity(0.20)),
                     ),
                   ),
                 ),
@@ -115,15 +112,17 @@ class CurvedTopRectanglePainter extends CustomPainter {
 
     final path = Path()
       ..moveTo(0, size.height * 0.30) // Start point for increased curviness
-      ..quadraticBezierTo(
-          size.width * 0.5, -size.height * 0.30, size.width, size.height * 0.30) // Control point adjusted for more curviness
+      ..quadraticBezierTo(size.width * 0.5, -size.height * 0.30, size.width,
+          size.height * 0.30) // Control point adjusted for more curviness
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
       ..close();
 
     final borderPath = Path()
-      ..moveTo(0 - borderPaint.strokeWidth / 2, size.height * 0.30) // Move the border path slightly outside
-      ..quadraticBezierTo(size.width * 0.5, -size.height * 0.30, size.width + borderPaint.strokeWidth / 2, size.height * 0.30);
+      ..moveTo(0 - borderPaint.strokeWidth / 2,
+          size.height * 0.30) // Move the border path slightly outside
+      ..quadraticBezierTo(size.width * 0.5, -size.height * 0.30,
+          size.width + borderPaint.strokeWidth / 2, size.height * 0.30);
 
     canvas.drawPath(path, paint);
     canvas.drawPath(borderPath, borderPaint);

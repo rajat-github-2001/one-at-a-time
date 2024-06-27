@@ -85,18 +85,14 @@ class WelcomeScreen extends StatelessWidget {
                 Icons.arrow_forward,
                 color: Colors.white,
               ),
-              style: ButtonStyle(
-                backgroundColor:
-                    WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                elevation: WidgetStateProperty.all(5),
-                padding: WidgetStateProperty.all(
-                  const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
-                  ),
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0XFF3B3EDE),
+                elevation: 5,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
                 ),
-                shadowColor:
-                    WidgetStateProperty.all(Colors.black.withOpacity(0.5)),
+                shadowColor: Colors.black.withOpacity(0.5),
               ),
             ),
           ),
