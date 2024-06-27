@@ -13,55 +13,6 @@ class MoodTrackScreen extends StatefulWidget {
 }
 
 class _MoodTrackScreenState extends State<MoodTrackScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 26.0, left: 25.0, right: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 26,
-            ),
-            Text(
-              'With love, for self',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            SizedBox(height: 30),
-            MotivationCard(),
-            SizedBox(height: 30),
-            FeelingSection(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MotivationCard extends StatelessWidget {
-  const MotivationCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 358,
-      height: 178,
-      decoration: BoxDecoration(
-        color: Colors.grey,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Motivation',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
   String? _selectedEmoji;
 
   void _showMoodDialog() {
@@ -72,28 +23,6 @@ class MotivationCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
-          SizedBox(height: 10),
-          Center(
-            child: Text(
-              'I am a magnet for positivity and blessings.',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                icon: Icon(Icons.help_outline),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: Icon(Icons.share),
-                onPressed: () {},
-              ),
-            ],
           content: Container(
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.3,
@@ -219,6 +148,90 @@ class MotivationCard extends StatelessWidget {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 26.0, left: 25.0, right: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 26,
+            ),
+            Text(
+              'With love, for self',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            SizedBox(height: 30),
+            MotivationCard(),
+            SizedBox(height: 30),
+            FeelingSection(),
+            // Center(
+            //   child: ElevatedButton(
+            //     onPressed: _showMoodDialog,
+            //     child: Text('Track your mood'),
+            //   ),
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MotivationCard extends StatelessWidget {
+  const MotivationCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 358,
+      height: 178,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Motivation',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          Center(
+            child: Text(
+              'I am a magnet for positivity and blessings.',
+              style: TextStyle(
+                fontSize: 16,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                icon: Icon(Icons.help_outline),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: Icon(Icons.share),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -226,9 +239,7 @@ class MotivationCard extends StatelessWidget {
 }
 
 class FeelingSection extends StatefulWidget {
-  const FeelingSection({
-    super.key,
-  });
+  const FeelingSection({super.key});
 
   @override
   State<FeelingSection> createState() => _FeelingSectionState();
@@ -243,8 +254,8 @@ class _FeelingSectionState extends State<FeelingSection> {
         final updatedText = context.watch<MoodCard>().updatedText;
 
         return GestureDetector(
-          onTap: () => {
-            Navigator.pushReplacementNamed(context, '/mood'),
+          onTap: () {
+            Navigator.pushReplacementNamed(context, '/mood');
           },
           child: isUpdated ? updatedContent(updatedText) : initialContent(),
         );
@@ -299,7 +310,6 @@ class _FeelingSectionState extends State<FeelingSection> {
     return Container(
       width: 358,
       height: 143, // Adjust this value if needed to match the image
-      // margin: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment(-0.99, 0.14), // Approximately 82 degrees
@@ -343,12 +353,6 @@ class _FeelingSectionState extends State<FeelingSection> {
             ),
           ],
         ),
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: _showMoodDialog,
-        child: Text('Track your mood'),
       ),
     );
   }

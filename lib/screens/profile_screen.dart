@@ -101,16 +101,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Navigator.pushReplacementNamed(context, '/starting');
                         }
                       },
-                      style: ButtonStyle(
-                          backgroundColor:
-                              WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                          elevation: WidgetStateProperty.all(5),
-                          padding:
-                              WidgetStateProperty.all(const EdgeInsets.all(20)),
-                          shadowColor: WidgetStateProperty.all(
-                              Colors.black.withOpacity(0.5))),
-                      child:
-                          const Text("Next", style: TextStyle(color: Colors.white)),
+                      style: TextButton.styleFrom(
+                          backgroundColor: const Color(0XFF3B3EDE),
+                          elevation: 5,
+                          padding: const EdgeInsets.all(20),
+                          shadowColor: Colors.black.withOpacity(0.5)),
+                      child: const Text("Next",
+                          style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),
@@ -146,7 +143,8 @@ class _OptionCardState extends State<OptionCard> {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
+            color:
+                isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
           ),
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(30),
@@ -154,7 +152,8 @@ class _OptionCardState extends State<OptionCard> {
         child: ListTile(
           leading: Icon(
             isSelected ? Icons.circle : Icons.circle_outlined,
-            color: isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
+            color:
+                isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
           ),
           title: Text(
             widget.optionText,
