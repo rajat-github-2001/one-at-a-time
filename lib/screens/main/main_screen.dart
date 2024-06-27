@@ -8,8 +8,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
     required this.currentIndex,
     required this.onTap,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       ],
       showUnselectedLabels: true,
       currentIndex: currentIndex,
-      selectedItemColor: Color(0XFF3B3EDE),
+      selectedItemColor: const Color(0XFF3B3EDE),
       unselectedItemColor: Colors.grey,
       onTap: onTap,
     );

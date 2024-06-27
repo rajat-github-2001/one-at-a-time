@@ -87,30 +87,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                       );
                     }),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       onPressed: () {
                         if (questionIndex < questions.length - 1) {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.easeInOut,
                           );
                         } else {
                           Navigator.pushReplacementNamed(context, '/starting');
                         }
                       },
-                      child:
-                          Text("Next", style: TextStyle(color: Colors.white)),
                       style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(Color(0XFF3B3EDE)),
-                          elevation: MaterialStateProperty.all(5),
+                              WidgetStateProperty.all(const Color(0XFF3B3EDE)),
+                          elevation: WidgetStateProperty.all(5),
                           padding:
-                              MaterialStateProperty.all(EdgeInsets.all(20)),
-                          shadowColor: MaterialStateProperty.all(
+                              WidgetStateProperty.all(const EdgeInsets.all(20)),
+                          shadowColor: WidgetStateProperty.all(
                               Colors.black.withOpacity(0.5))),
+                      child:
+                          const Text("Next", style: TextStyle(color: Colors.white)),
                     ),
                   ],
                 ),
@@ -126,7 +126,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 class OptionCard extends StatefulWidget {
   final String optionText;
 
-  const OptionCard({Key? key, required this.optionText}) : super(key: key);
+  const OptionCard({super.key, required this.optionText});
 
   @override
   State<OptionCard> createState() => _OptionCardState();
@@ -146,7 +146,7 @@ class _OptionCardState extends State<OptionCard> {
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? const Color(0XFF3B3EDE) : Color(0XFFE5E6EE),
+            color: isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
           ),
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(30),
@@ -154,7 +154,7 @@ class _OptionCardState extends State<OptionCard> {
         child: ListTile(
           leading: Icon(
             isSelected ? Icons.circle : Icons.circle_outlined,
-            color: isSelected ? const Color(0XFF3B3EDE) : Color(0XFFE5E6EE),
+            color: isSelected ? const Color(0XFF3B3EDE) : const Color(0XFFE5E6EE),
           ),
           title: Text(
             widget.optionText,

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:one_at_a_time/providers/mood_card.dart';
+import 'package:one_at_a_time/screens/main/mood_track/mood_screen.dart';
+import 'package:one_at_a_time/screens/main/mood_track/mood_track_screen.dart';
 import 'package:one_at_a_time/screens/starting_screen.dart';
+import 'package:provider/provider.dart';
 import './screens/main/todo/todo_screen.dart';
 import './screens/onboarding_screen.dart';
 import './screens/welcome_screen.dart';
@@ -16,21 +20,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => OnBoardingScreen(),
-        '/welcome': (context) => const WelcomeScreen(),
-        '/login': (context) => Login(),
-        '/signup': (context) => SignUp(),
-        '/profile': (context) => ProfileScreen(),
-        '/starting': (context) => StartingScreen(),
-        '/main': (context) => ToDoScreen(),
-      },
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Euclid Circular A'
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MoodCard(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const OnBoardingScreen(),
+          '/welcome': (context) => const WelcomeScreen(),
+          '/login': (context) => const Login(),
+          '/signup': (context) => const SignUp(),
+          '/profile': (context) => const ProfileScreen(),
+          '/starting': (context) => const StartingScreen(),
+          '/main': (context) => const ToDoScreen(),
+          '/moodtrack': (context) => const MoodTrackScreen(),
+          '/mood': (context) => const MoodScreen(),
+        },
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Euclid Circular A'),
       ),
     );
   }

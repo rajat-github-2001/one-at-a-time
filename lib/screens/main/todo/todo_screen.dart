@@ -88,12 +88,12 @@ class _ToDoScreenState extends State<ToDoScreen> {
     );
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     MainContent(
-        tasks: [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
-    MoodTrackScreen(),
-    ReflectScreen(),
-    UserProfileScreen(),
+        tasks: const [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
+    const MoodTrackScreen(),
+    const ReflectScreen(),
+    const UserProfileScreen(),
   ];
 }
 
@@ -202,9 +202,9 @@ class _MainContentState extends State<MainContent> {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-              color: isSelected ? Color(0XFF3B3EDE) : Colors.transparent,
+              color: isSelected ? const Color(0XFF3B3EDE) : Colors.transparent,
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
             children: [
               day is String
@@ -259,6 +259,65 @@ class _MainContentState extends State<MainContent> {
           color: Colors.white,
         ),
       ),
+    );
+  }
+}
+
+class AddTaskDialog extends StatefulWidget {
+  final Function(Task) onTaskAdded;
+
+  const AddTaskDialog({required this.onTaskAdded, super.key});
+
+  @override
+  State<AddTaskDialog> createState() => _AddTaskDialogState();
+}
+
+class _AddTaskDialogState extends State<AddTaskDialog> {
+  final _titleController = TextEditingController();
+  final _subtitleController = TextEditingController();
+  final _emojiController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Add Task'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _titleController,
+            decoration: const InputDecoration(labelText: 'Title'),
+          ),
+          TextField(
+            controller: _subtitleController,
+            decoration: const InputDecoration(labelText: 'Subtitle'),
+          ),
+          TextField(
+            controller: _emojiController,
+            decoration: const InputDecoration(labelText: 'Emoji'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancel'),
+        ),
+        TextButton(
+          onPressed: () {
+            final task = Task(
+              title: _titleController.text,
+              subtitle: _subtitleController.text,
+              emoji: _emojiController.text,
+            );
+            widget.onTaskAdded(task);
+            Navigator.of(context).pop();
+          },
+          child: const Text('Add'),
+        ),
+      ],
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0),
