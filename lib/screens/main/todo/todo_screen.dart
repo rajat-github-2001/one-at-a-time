@@ -48,7 +48,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
         backgroundColor: Color.fromARGB(255, 241, 231, 224),
         context: context,
         isScrollControlled: true,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
         ),
         builder: (context) {

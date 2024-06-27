@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './add_journal.dart';
+import '../../../models/entry.dart';
 
 class ReflectScreen extends StatefulWidget {
   const ReflectScreen({super.key});
@@ -9,90 +11,110 @@ class ReflectScreen extends StatefulWidget {
 
 class _ReflectScreenState extends State<ReflectScreen> {
   int selectedChipIndex = 0;
-  List<Map<String, dynamic>> entries = [
-    {
-      'date': '24 May 2023',
-      'journal':
-          'Feeling Sad with 29 others and Lorem Epsum: dadadadadadadaddadadada:',
-      'type': 'reflection',
-      'color': Colors.yellow.shade100,
-      'prompt': 'What made you feel this way?'
-    },
-    {
-      'date': '23 May 2023',
-      'journal': 'Had a wonderful day at the park with friends.',
-      'type': 'personal_diary',
-      'color': Colors.red.shade100,
-    },
-    {
-      'date': '22 May 2023',
-      'journal': 'Feeling motivated and ready to tackle new challenges!',
-      'type': 'reflection',
-      'color': Colors.green.shade100,
-      'prompt': 'What challenges are you planning to tackle?'
-    },
-    {
-      'date': '21 May 2023',
-      'journal': 'Spent the evening reading a book and relaxing.',
-      'type': 'personal_diary',
-      'color': Colors.blue.shade100,
-    },
-    {
-      'date': '20 May 2023',
-      'journal': 'Feeling anxious about upcoming exams.',
-      'type': 'reflection',
-      'color': Colors.orange.shade100,
-      'prompt': 'What can you do to reduce your anxiety?'
-    },
-    {
-      'date': '19 May 2023',
-      'journal': 'Had a delicious meal at a new restaurant.',
-      'type': 'personal_diary',
-      'color': Colors.purple.shade100,
-    },
-    {
-      'date': '18 May 2023',
-      'journal': 'Feeling grateful for my family and friends.',
-      'type': 'reflection',
-      'color': Colors.pink.shade100,
-      'prompt': 'What specific things are you grateful for?'
-    },
-    {
-      'date': '17 May 2023',
-      'journal': 'Watched a great movie with my siblings.',
-      'type': 'personal_diary',
-      'color': Colors.cyan.shade100,
-    },
-    {
-      'date': '16 May 2023',
-      'journal': 'Feeling tired but accomplished after a productive day.',
-      'type': 'reflection',
-      'color': Colors.amber.shade100,
-      'prompt': 'What did you accomplish today?'
-    },
-    {
-      'date': '15 May 2023',
-      'journal': 'Enjoyed a peaceful walk in the park.',
-      'type': 'personal_diary',
-      'color': Colors.lime.shade100,
-    },
+  List<Entry> entries = [
+    Entry(
+    date: '24 May 2023',
+    journal: 'Feeling Sad with 29 others and Lorem Epsum: dadadadadadadaddadadada:',
+    type: 'reflection',
+    color: Colors.yellow.shade100,
+    prompt: 'What made you feel this way?',
+  ),
+  Entry(
+    date: '23 May 2023',
+    journal: 'Had a wonderful day at the park with friends.',
+    type: 'personal_diary',
+    color: Colors.red.shade100,
+  ),
+  Entry(
+    date: '22 May 2023',
+    journal: 'Feeling motivated and ready to tackle new challenges!',
+    type: 'reflection',
+    color: Colors.green.shade100,
+    prompt: 'What challenges are you planning to tackle?',
+  ),
+  Entry(
+    date: '21 May 2023',
+    journal: 'Spent the evening reading a book and relaxing.',
+    type: 'personal_diary',
+    color: Colors.blue.shade100,
+  ),
+  Entry(
+    date: '20 May 2023',
+    journal: 'Feeling anxious about upcoming exams.',
+    type: 'reflection',
+    color: Colors.orange.shade100,
+    prompt: 'What can you do to reduce your anxiety?',
+  ),
+  Entry(
+    date: '19 May 2023',
+    journal: 'Had a delicious meal at a new restaurant.',
+    type: 'personal_diary',
+    color: Colors.purple.shade100,
+  ),
+  Entry(
+    date: '18 May 2023',
+    journal: 'Feeling grateful for my family and friends.',
+    type: 'reflection',
+    color: Colors.pink.shade100,
+    prompt: 'What specific things are you grateful for?',
+  ),
+  Entry(
+    date: '17 May 2023',
+    journal: 'Watched a great movie with my siblings.',
+    type: 'personal_diary',
+    color: Colors.cyan.shade100,
+  ),
+  Entry(
+    date: '16 May 2023',
+    journal: 'Feeling tired but accomplished after a productive day.',
+    type: 'reflection',
+    color: Colors.amber.shade100,
+    prompt: 'What did you accomplish today?',
+  ),
+  Entry(
+    date: '15 May 2023',
+    journal: 'Enjoyed a peaceful walk in the park.',
+    type: 'personal_diary',
+    color: Colors.lime.shade100,
+  ),
   ];
 
-  List<Map<String, dynamic>> getFilteredEntries() {
+  void _addJournal(Entry entry) {
+    setState(() {
+      entries.add(entry);
+    });
+  }
+
+  List<Entry> getFilteredEntries() {
     if (selectedChipIndex == 0) {
       return entries;
     } else if (selectedChipIndex == 1) {
-      return entries.where((entry) => entry['type'] == 'reflection').toList();
+      return entries.where((entry) => entry.type == 'reflection').toList();
     } else {
       return entries
-          .where((entry) => entry['type'] == 'personal_diary')
+          .where((entry) => entry.type == 'personal_diary')
           .toList();
     }
   }
 
+  void _showNewEntryModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        ),
+      builder: (context) {
+        return AddJournal(
+          onJournalAdd: _addJournal,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> filteredEntries = getFilteredEntries();
+    List<Entry> filteredEntries = getFilteredEntries();
 
     return Scaffold(
       appBar: AppBar(
@@ -191,7 +213,9 @@ class _ReflectScreenState extends State<ReflectScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showNewEntryModal(context);
+                  },
                   icon: Icon(Icons.edit),
                   label: Text('New Entry',
                       style: TextStyle(
@@ -233,7 +257,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: entry['color'],
+                      color: entry.color,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     padding: const EdgeInsets.all(16.0),
@@ -241,18 +265,18 @@ class _ReflectScreenState extends State<ReflectScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          entry['date'],
+                          entry.date,
                           style: TextStyle(color: Colors.grey),
                         ),
                         SizedBox(height: 8),
                         Text(
-                          entry['journal'],
+                          entry.journal,
                           style: TextStyle(fontSize: 16),
                         ),
-                        if (entry['type'] == 'reflection') ...[
+                        if (entry.type == 'reflection') ...[
                           SizedBox(height: 8),
                           Text(
-                            'Prompt: ${entry['prompt']}',
+                            '${entry.prompt}',
                             style: TextStyle(fontSize: 14, color: Colors.grey),
                           ),
                         ],
