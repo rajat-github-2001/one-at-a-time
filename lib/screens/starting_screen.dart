@@ -13,7 +13,7 @@ class StartingScreen extends StatelessWidget {
             top: MediaQuery.of(context).size.height * 0.25,
             left: -20,
             right: -20,
-            child: SizedBox(
+            child: Container(
               height: MediaQuery.of(context).size.height * 0.8,
               child: FractionallySizedBox(
                 widthFactor: 1.2,
@@ -37,9 +37,9 @@ class StartingScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const SizedBox(
+                Container(
                   width: 279,
-                  child: Text(
+                  child: const Text(
                     "Take a step closer to your journey of a better and healthy life.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -56,7 +56,7 @@ class StartingScreen extends StatelessWidget {
                   fit: BoxFit.contain,
                 ),
                 const SizedBox(height: 120),
-                SizedBox(
+                Container(
                   width: 400,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -77,15 +77,15 @@ class StartingScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                        elevation: WidgetStateProperty.all(5),
-                        padding: WidgetStateProperty.all(
+                        backgroundColor: MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                        elevation: MaterialStateProperty.all(5),
+                        padding: MaterialStateProperty.all(
                           const EdgeInsets.symmetric(
                             horizontal: 20,
                             vertical: 20,
                           ),
                         ),
-                        shadowColor: WidgetStateProperty.all(
+                        shadowColor: MaterialStateProperty.all(
                             const Color(0XFF3B3EDE).withOpacity(0.20)),
                       ),
                     ),

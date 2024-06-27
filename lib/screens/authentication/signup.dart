@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -8,7 +10,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   bool _passwordObscured = true;
   bool _agree = false;
 
@@ -78,9 +80,9 @@ class _SignUpState extends State<SignUp> {
               ),
               style: ButtonStyle(
                   backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFFFBFEFB)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(const EdgeInsets.symmetric(
+                      MaterialStateProperty.all(const Color(0XFFFBFEFB)),
+                  elevation: MaterialStateProperty.all(5),
+                  padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
                       horizontal: 37, vertical: 22))),
             ),
           ),
@@ -88,7 +90,7 @@ class _SignUpState extends State<SignUp> {
             height: 24,
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
+            padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Row(
               children: [
                 Expanded(
@@ -121,7 +123,7 @@ class _SignUpState extends State<SignUp> {
             height: 16,
           ),
           Container(
-            margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
+            margin: EdgeInsets.only(top: 12, left: 20, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -136,8 +138,8 @@ class _SignUpState extends State<SignUp> {
                 TextField(
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color(0XFFFBFEFB),
-                    contentPadding: const EdgeInsets.all(15),
+                    fillColor: Color(0XFFFBFEFB),
+                    contentPadding: EdgeInsets.all(15),
                     hintText: "Enter your e-mail here",
                     hintStyle:
                         const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
@@ -157,7 +159,7 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
+            margin: EdgeInsets.only(top: 12, left: 20, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -172,13 +174,13 @@ class _SignUpState extends State<SignUp> {
                 TextField(
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color(0XFFFBFEFB),
-                    contentPadding: const EdgeInsets.all(15),
+                    fillColor: Color(0XFFFBFEFB),
+                    contentPadding: EdgeInsets.all(15),
                     hintText: "Type in your username",
                     hintStyle:
-                        const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
-                    prefixIcon: const Padding(
-                      padding: EdgeInsets.all(16),
+                        TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(16),
                       child: Icon(
                         Icons.account_circle_outlined,
                         color: Color(0XFF898D9E),
@@ -193,7 +195,7 @@ class _SignUpState extends State<SignUp> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
+            margin: EdgeInsets.only(top: 12, left: 20, right: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -209,13 +211,13 @@ class _SignUpState extends State<SignUp> {
                   controller: _passwordController,
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color(0XFFFBFEFB),
-                    contentPadding: const EdgeInsets.all(15),
+                    fillColor: Color(0XFFFBFEFB),
+                    contentPadding: EdgeInsets.all(15),
                     hintText: "Place the password here",
                     hintStyle:
-                        const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
-                    prefixIcon: const Padding(
-                      padding: EdgeInsets.all(16),
+                        TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(16),
                       child: Icon(
                         Icons.lock_outline,
                         color: Color(0XFF898D9E),
@@ -228,12 +230,12 @@ class _SignUpState extends State<SignUp> {
                         });
                       },
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16),
                         child: Icon(
                           _passwordObscured
                               ? Icons.visibility_off_outlined
                               : Icons.visibility_outlined,
-                          color: const Color(0XFF898D9E),
+                          color: Color(0XFF898D9E),
                         ),
                       ),
                     ),
@@ -267,22 +269,22 @@ class _SignUpState extends State<SignUp> {
                 ),
                 style: ButtonStyle(
                   backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(
+                      MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                  elevation: MaterialStateProperty.all(5),
+                  padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(
                       horizontal: 20,
                       vertical: 20,
                     ),
                   ),
-                  shadowColor: WidgetStateProperty.all(
+                  shadowColor: MaterialStateProperty.all(
                       const Color(0XFF3B3EDE).withOpacity(0.20)),
                 ),
               ),
             ),
             const SizedBox(height: 42,),
             Container(
-              margin: const EdgeInsets.only(top: 16, left: 20, right: 20),
+              margin: EdgeInsets.only(top: 16, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,7 +298,7 @@ class _SignUpState extends State<SignUp> {
                     child: Icon(
                       _agree ? Icons.check_box :
                       Icons.check_box_outline_blank,
-                      color: _agree ? const Color(0XFF3B3EDE) : Colors.white,
+                      color: _agree ? Color(0XFF3B3EDE) : Colors.white,
                     ),
                   ),
                   const SizedBox(width: 8,),
@@ -317,7 +319,7 @@ class _SignUpState extends State<SignUp> {
               height: 16,
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
                 color: Colors.grey,
                 thickness: 1,

@@ -8,7 +8,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final TextEditingController _passwordController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   bool _passwordObscured = true;
   bool _rememberMe = false;
 
@@ -78,9 +78,9 @@ class _LoginState extends State<Login> {
                 ),
                 style: ButtonStyle(
                     backgroundColor:
-                        WidgetStateProperty.all(const Color(0XFFFBFEFB)),
-                    elevation: WidgetStateProperty.all(5),
-                    padding: WidgetStateProperty.all(
+                        MaterialStateProperty.all(const Color(0XFFFBFEFB)),
+                    elevation: MaterialStateProperty.all(5),
+                    padding: MaterialStateProperty.all(
                         const EdgeInsets.symmetric(
                             horizontal: 37, vertical: 22))),
               ),
@@ -88,8 +88,8 @@ class _LoginState extends State<Login> {
             const SizedBox(
               height: 24,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
               child: Row(
                 children: [
                   Expanded(
@@ -99,7 +99,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     child: Text(
                       'Or',
                       style: TextStyle(
@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
               height: 16,
             ),
             Container(
-              margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
+              margin: EdgeInsets.only(top: 12, left: 20, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -137,13 +137,13 @@ class _LoginState extends State<Login> {
                   TextField(
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color(0XFFFBFEFB),
-                      contentPadding: const EdgeInsets.all(15),
+                      fillColor: Color(0XFFFBFEFB),
+                      contentPadding: EdgeInsets.all(15),
                       hintText: "Type in your username",
                       hintStyle:
-                          const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.all(16),
+                          TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(16),
                         child: Icon(
                           Icons.account_circle_outlined,
                           color: Color(0XFF898D9E),
@@ -158,7 +158,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
+              margin: EdgeInsets.only(top: 12, left: 20, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -174,13 +174,13 @@ class _LoginState extends State<Login> {
                     controller: _passwordController,
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: const Color(0XFFFBFEFB),
-                      contentPadding: const EdgeInsets.all(15),
+                      fillColor: Color(0XFFFBFEFB),
+                      contentPadding: EdgeInsets.all(15),
                       hintText: "Place the password here",
                       hintStyle:
-                          const TextStyle(color: Color(0XFF898D9E), fontSize: 14),
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.all(16),
+                          TextStyle(color: Color(0XFF898D9E), fontSize: 14),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.all(16),
                         child: Icon(
                           Icons.lock_outline,
                           color: Color(0XFF898D9E),
@@ -193,12 +193,12 @@ class _LoginState extends State<Login> {
                           });
                         },
                         child: Padding(
-                          padding: const EdgeInsets.all(16),
+                          padding: EdgeInsets.all(16),
                           child: Icon(
                             _passwordObscured
                                 ? Icons.visibility_off_outlined
                                 : Icons.visibility_outlined,
-                            color: const Color(0XFF898D9E),
+                            color: Color(0XFF898D9E),
                           ),
                         ),
                       ),
@@ -212,7 +212,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(top: 16, left: 20, right: 20),
+              margin: EdgeInsets.only(top: 16, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -230,7 +230,7 @@ class _LoginState extends State<Login> {
                             _rememberMe
                                 ? Icons.check_box
                                 : Icons.check_box_outline_blank,
-                            color: _rememberMe ? const Color(0XFF3B3EDE) : Colors.white,
+                            color: _rememberMe ? Color(0XFF3B3EDE) : Colors.white,
                           ),
                         ),
                         const SizedBox(
@@ -281,15 +281,15 @@ class _LoginState extends State<Login> {
                 ),
                 style: ButtonStyle(
                   backgroundColor:
-                      WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                  elevation: WidgetStateProperty.all(5),
-                  padding: WidgetStateProperty.all(
+                      MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                  elevation: MaterialStateProperty.all(5),
+                  padding: MaterialStateProperty.all(
                     const EdgeInsets.symmetric(
                       horizontal: 20,
                       vertical: 20,
                     ),
                   ),
-                  shadowColor: WidgetStateProperty.all(
+                  shadowColor: MaterialStateProperty.all(
                       const Color(0XFF3B3EDE).withOpacity(0.20)),
                 ),
               ),
@@ -298,7 +298,7 @@ class _LoginState extends State<Login> {
               height: 42,
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
                 color: Colors.grey,
                 thickness: 1,

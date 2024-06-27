@@ -87,16 +87,16 @@ class WelcomeScreen extends StatelessWidget {
               ),
               style: ButtonStyle(
                 backgroundColor:
-                    WidgetStateProperty.all(const Color(0XFF3B3EDE)),
-                elevation: WidgetStateProperty.all(5),
-                padding: WidgetStateProperty.all(
+                    MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                elevation: MaterialStateProperty.all(5),
+                padding: MaterialStateProperty.all(
                   const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 20,
                   ),
                 ),
                 shadowColor:
-                    WidgetStateProperty.all(Colors.black.withOpacity(0.5)),
+                    MaterialStateProperty.all(Colors.black.withOpacity(0.5)),
               ),
             ),
           ),
