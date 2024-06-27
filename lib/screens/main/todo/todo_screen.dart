@@ -4,6 +4,8 @@ import '../main_screen.dart';
 import '../mood_track/mood_track_screen.dart';
 import '../user_profile/user_profile_screen.dart';
 import '../reflect/reflect_screen.dart';
+import '../../../models/task.dart';
+import './add_task.dart';
 
 class ToDoScreen extends StatefulWidget {
   const ToDoScreen({super.key});
@@ -13,12 +15,12 @@ class ToDoScreen extends StatefulWidget {
 }
 
 class _ToDoScreenState extends State<ToDoScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   final List<Task> _tasks = [
-    Task(title: 'Run 4k', subtitle: 'Note lorem ipsum', emoji: '🏃‍♂️'),
+    Task(title: 'Run 4k', subtitle: 'All Day', emoji: '🏃‍♂️'),
     Task(
         title: 'Take a shower',
-        subtitle: 'Note lorem ipsum',
+        subtitle: '9:30 AM',
         isCompleted: true,
         emoji: '🚿'),
   ];
@@ -41,6 +43,21 @@ class _ToDoScreenState extends State<ToDoScreen> {
     });
   }
 
+  void _showAddTaskModal(BuildContext context) {
+    showModalBottomSheet(
+        backgroundColor: Color.fromARGB(255, 241, 231, 224),
+        context: context,
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        ),
+        builder: (context) {
+          return AddTaskBottomSheet(
+            onTaskAdded: _addTask,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,21 +76,12 @@ class _ToDoScreenState extends State<ToDoScreen> {
       ),
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AddTaskDialog(
-                      onTaskAdded: _addTask,
-                    );
-                  },
-                );
-              },
-              backgroundColor: const Color(0XFF3B3EDE),
+              onPressed: () => _showAddTaskModal(context),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
               ),
+              backgroundColor: Color(0XFF3B3EDE),
             )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -89,21 +97,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
   ];
 }
 
-class Task {
-  String title;
-  String subtitle;
-  bool isCompleted;
-  String emoji;
-
-  Task({
-    required this.title,
-    required this.subtitle,
-    this.isCompleted = false,
-    required this.emoji,
-  });
-}
-
-class MainContent extends StatelessWidget {
+class MainContent extends StatefulWidget {
   final List<Task> tasks;
   final Function(Task) addTask;
   final Function(int) toggleTaskCompletion;
@@ -115,6 +109,11 @@ class MainContent extends StatelessWidget {
     super.key,
   });
 
+  @override
+  State<MainContent> createState() => _MainContentState();
+}
+
+class _MainContentState extends State<MainContent> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -150,11 +149,11 @@ class MainContent extends StatelessWidget {
                 color: Colors.white,
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16.0),
-                  itemCount: tasks.length,
+                  itemCount: widget.tasks.length,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        _buildTaskCard(tasks[index], index),
+                        _buildTaskCard(widget.tasks[index], index),
                         const SizedBox(height: 8),
                       ],
                     );
@@ -169,11 +168,12 @@ class MainContent extends StatelessWidget {
   }
 
   List<Widget> _buildCalendarRow() {
-    bool allCompleted = tasks.every((task) => task.isCompleted);
+    bool allCompleted = widget.tasks.every((task) => task.isCompleted);
 
     if (allCompleted) {
       return [
-        _buildCalendarDay('⭐', '30', true),
+        _buildCalendarDay(
+            Image.asset('assets/icons/star-icon.png'), '30', true),
         _buildCalendarDay('Tue', '01', false),
         _buildCalendarDay('Wed', '02', false),
         _buildCalendarDay('Thu', '03', false),
@@ -192,7 +192,7 @@ class MainContent extends StatelessWidget {
     ];
   }
 
-  Widget _buildCalendarDay(String day, String date, bool isSelected) {
+  Widget _buildCalendarDay(dynamic day, String date, bool isSelected) {
     return Column(
       children: [
         const SizedBox(height: 8),
@@ -207,13 +207,18 @@ class MainContent extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
             children: [
-              Text(
-                day,
-                style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.grey,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                ),
-              ),
+              day is String
+                  ? Text(
+                      day,
+                      style: TextStyle(
+                        color: isSelected ? Colors.white : Colors.grey,
+                        fontWeight:
+                            isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                    )
+                  : day is Image
+                      ? day
+                      : Container(),
               Text(
                 date,
                 style: TextStyle(
@@ -229,32 +234,29 @@ class MainContent extends StatelessWidget {
   }
 
   Widget _buildTaskCard(Task task, int index) {
-    return Card(
-      child: ListTile(
-        leading: Text(
-          task.emoji,
-          style: const TextStyle(fontSize: 24),
-        ),
-        trailing: IconButton(
-          icon: task.isCompleted
-              ? const Icon(Icons.check_circle, color: Colors.green)
-              : const Icon(Icons.radio_button_unchecked),
-          onPressed: () {
-            toggleTaskCompletion(index);
-          },
-        ),
-        title: Text(
-          task.title,
-          style: TextStyle(
-            decoration: task.isCompleted ? TextDecoration.lineThrough : null,
-            fontWeight: FontWeight.bold,
+    return Dismissible(
+      key: Key(task.title),
+      direction: DismissDirection.endToStart,
+      onDismissed: (direction) {
+        setState(() {
+          widget.tasks.removeAt(index);
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${task.title} removed'),
           ),
-        ),
-        subtitle: Text(
-          task.subtitle,
-          style: TextStyle(
-            decoration: task.isCompleted ? TextDecoration.lineThrough : null,
-          ),
+        );
+      },
+      background: Container(
+        alignment: Alignment.centerRight,
+        decoration: BoxDecoration(
+            color: Colors.red,
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.all(Radius.circular(16.0))),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Icon(
+          Icons.delete,
+          color: Colors.white,
         ),
       ),
     );
@@ -316,14 +318,40 @@ class _AddTaskDialogState extends State<AddTaskDialog> {
           child: const Text('Add'),
         ),
       ],
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: ListTile(
+            leading: Text(
+              task.emoji,
+              style: TextStyle(fontSize: 24),
+            ),
+            trailing: IconButton(
+              icon: task.isCompleted
+                  ? Icon(Icons.check_circle, color: Colors.green)
+                  : Icon(Icons.radio_button_unchecked),
+              onPressed: () {
+                widget.toggleTaskCompletion(index);
+              },
+            ),
+            title: Text(
+              task.title,
+              style: TextStyle(
+                decoration:
+                    task.isCompleted ? TextDecoration.lineThrough : null,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Text(
+              task.subtitle,
+              style: TextStyle(
+                decoration:
+                    task.isCompleted ? TextDecoration.lineThrough : null,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _subtitleController.dispose();
-    _emojiController.dispose();
-    super.dispose();
   }
 }
