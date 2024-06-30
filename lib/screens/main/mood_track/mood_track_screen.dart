@@ -48,7 +48,11 @@ class MotivationCard extends StatelessWidget {
       width: 358,
       height: 178,
       decoration: BoxDecoration(
-        color: Colors.grey,
+        image: DecorationImage(
+          image: AssetImage(
+              'assets/images/bg.png'), // Replace with your background image path
+          fit: BoxFit.cover,
+        ),
         borderRadius: BorderRadius.circular(10),
       ),
       padding: EdgeInsets.all(16),
@@ -76,11 +80,13 @@ class MotivationCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                icon: Icon(Icons.help_outline),
+                padding: EdgeInsets.all(0),
+                icon: Image.asset('assets/mood_icons/paint.png'),
                 onPressed: () {},
               ),
               IconButton(
-                icon: Icon(Icons.share),
+                padding: EdgeInsets.all(0),
+                icon: Image.asset('assets/mood_icons/share.png'),
                 onPressed: () {},
               ),
             ],

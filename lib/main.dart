@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:one_at_a_time/providers/mood_card.dart';
 import 'package:one_at_a_time/screens/main/mood_track/mood_screen.dart';
 import 'package:one_at_a_time/screens/main/mood_track/mood_track_screen.dart';
+import 'package:one_at_a_time/screens/main/user_profile/edit_user_screen.dart';
+import 'package:one_at_a_time/screens/main/user_profile/habits_screen.dart';
+import 'package:one_at_a_time/screens/main/user_profile/journal_screen.dart';
+import 'package:one_at_a_time/screens/main/user_profile/mood_display_screen.dart';
 import 'package:one_at_a_time/screens/starting_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/main/todo/todo_screen.dart';
@@ -39,6 +43,10 @@ class MyApp extends StatelessWidget {
           '/main': (context) => const ToDoScreen(),
           '/moodtrack': (context) => const MoodTrackScreen(),
           '/mood': (context) => const MoodScreen(),
+          '/edituser': (context) => const EditProfilePage(),
+          '/habit': (context) => const AllHabitsPage(),
+          '/journal': (context) => const AllJournalsPage(),
+          '/moods': (context) => const AllMoodsPage(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Euclid Circular A'),

@@ -10,8 +10,6 @@ class ReflectScreen extends StatefulWidget {
 class _ReflectScreenState extends State<ReflectScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Reflect screen')
-    );
+    return const Center(child: Text('Reflect screen'));
   }
 }

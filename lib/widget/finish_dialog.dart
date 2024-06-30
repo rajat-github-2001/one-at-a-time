@@ -62,9 +62,8 @@ void showFinishDialog(BuildContext context) {
                 ),
                 onPressed: () {
                   Navigator.of(context).popUntil((route) => route.isFirst);
-                  Navigator.pushReplacementNamed(context, '/main');
-
-                  // Add your finish logic here
+                  Navigator.pushReplacementNamed(context, '/main',
+                      arguments: 1);
                 },
               ),
             ],

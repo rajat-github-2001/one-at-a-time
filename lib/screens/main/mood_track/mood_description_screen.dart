@@ -143,10 +143,7 @@ class _MoodReasonScreenState extends State<MoodReasonScreen> {
   void _onButtonPressed() {
     context.read<MoodCard>().updateMood();
     Navigator.of(context).popUntil((route) => route.isFirst);
-    Navigator.pushReplacementNamed(
-      context,
-      '/main',
-    );
+    Navigator.pushReplacementNamed(context, '/main', arguments: 1);
     updateMoodCardText(widget.moodData.text);
   }
 
