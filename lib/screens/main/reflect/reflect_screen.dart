@@ -13,75 +13,81 @@ class _ReflectScreenState extends State<ReflectScreen> {
   int selectedChipIndex = 0;
   List<Entry> entries = [
     Entry(
-    date: '24 May 2023',
-    journal: 'Feeling Sad with 29 others and Lorem Epsum: dadadadadadadaddadadada:',
-    type: 'reflection',
-    color: Colors.yellow.shade100,
-    prompt: 'What made you feel this way?',
-  ),
-  Entry(
-    date: '23 May 2023',
-    journal: 'Had a wonderful day at the park with friends.',
-    type: 'personal_diary',
-    color: Colors.red.shade100,
-  ),
-  Entry(
-    date: '22 May 2023',
-    journal: 'Feeling motivated and ready to tackle new challenges!',
-    type: 'reflection',
-    color: Colors.green.shade100,
-    prompt: 'What challenges are you planning to tackle?',
-  ),
-  Entry(
-    date: '21 May 2023',
-    journal: 'Spent the evening reading a book and relaxing.',
-    type: 'personal_diary',
-    color: Colors.blue.shade100,
-  ),
-  Entry(
-    date: '20 May 2023',
-    journal: 'Feeling anxious about upcoming exams.',
-    type: 'reflection',
-    color: Colors.orange.shade100,
-    prompt: 'What can you do to reduce your anxiety?',
-  ),
-  Entry(
-    date: '19 May 2023',
-    journal: 'Had a delicious meal at a new restaurant.',
-    type: 'personal_diary',
-    color: Colors.purple.shade100,
-  ),
-  Entry(
-    date: '18 May 2023',
-    journal: 'Feeling grateful for my family and friends.',
-    type: 'reflection',
-    color: Colors.pink.shade100,
-    prompt: 'What specific things are you grateful for?',
-  ),
-  Entry(
-    date: '17 May 2023',
-    journal: 'Watched a great movie with my siblings.',
-    type: 'personal_diary',
-    color: Colors.cyan.shade100,
-  ),
-  Entry(
-    date: '16 May 2023',
-    journal: 'Feeling tired but accomplished after a productive day.',
-    type: 'reflection',
-    color: Colors.amber.shade100,
-    prompt: 'What did you accomplish today?',
-  ),
-  Entry(
-    date: '15 May 2023',
-    journal: 'Enjoyed a peaceful walk in the park.',
-    type: 'personal_diary',
-    color: Colors.lime.shade100,
-  ),
+      date: '24 May 2023',
+      journal: 'Feeling Sad',
+      type: 'reflection',
+      color: Color(0xffF8F2EB),
+      prompt: 'What made you feel this way?',
+    ),
+    Entry(
+      date: '23 May 2023',
+      journal: 'Had a wonderful day at the park with friends.',
+      type: 'personal_diary',
+      color: Colors.red.shade100,
+    ),
+    Entry(
+      date: '22 May 2023',
+      journal: 'Feeling motivated and ready to tackle new challenges!',
+      type: 'reflection',
+      color: Color(0xffF8F2EB),
+      prompt: 'What challenges are you planning to tackle?',
+    ),
+    Entry(
+      date: '21 May 2023',
+      journal: 'Spent the evening reading a book and relaxing.',
+      type: 'personal_diary',
+      color: Colors.blue.shade100,
+    ),
+    Entry(
+      date: '20 May 2023',
+      journal: 'Feeling anxious about upcoming exams.',
+      type: 'reflection',
+      color: Color(0xffF8F2EB),
+      prompt: 'What can you do to reduce your anxiety?',
+    ),
+    Entry(
+      date: '19 May 2023',
+      journal: 'Had a delicious meal at a new restaurant.',
+      type: 'personal_diary',
+      color: Colors.purple.shade100,
+    ),
+    Entry(
+      date: '18 May 2023',
+      journal: 'Feeling grateful for my family and friends.',
+      type: 'reflection',
+      color: Color(0xffF8F2EB),
+      prompt: 'What specific things are you grateful for?',
+    ),
+    Entry(
+      date: '17 May 2023',
+      journal: 'Watched a great movie with my siblings.',
+      type: 'personal_diary',
+      color: Colors.cyan.shade100,
+    ),
+    Entry(
+      date: '16 May 2023',
+      journal: 'Feeling tired but accomplished after a productive day.',
+      type: 'reflection',
+      color: Color(0xffF8F2EB),
+      prompt: 'What did you accomplish today?',
+    ),
+    Entry(
+      date: '15 May 2023',
+      journal: 'Enjoyed a peaceful walk in the park.',
+      type: 'personal_diary',
+      color: Colors.lime.shade100,
+    ),
   ];
 
   void _addJournal(Entry entry) {
     setState(() {
-      entries.add(entry);
+      entries.insert(0, entry); // Insert the new entry at the 0th index
+    });
+  }
+
+  void _removeJournal(int index) {
+    setState(() {
+      entries.removeAt(index); // Remove the entry at the specified index
     });
   }
 
@@ -91,9 +97,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
     } else if (selectedChipIndex == 1) {
       return entries.where((entry) => entry.type == 'reflection').toList();
     } else {
-      return entries
-          .where((entry) => entry.type == 'personal_diary')
-          .toList();
+      return entries.where((entry) => entry.type == 'personal_diary').toList();
     }
   }
 
@@ -102,8 +106,8 @@ class _ReflectScreenState extends State<ReflectScreen> {
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-        ),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+      ),
       builder: (context) {
         return AddJournal(
           onJournalAdd: _addJournal,
@@ -253,34 +257,58 @@ class _ReflectScreenState extends State<ReflectScreen> {
               itemCount: filteredEntries.length,
               itemBuilder: (context, index) {
                 var entry = filteredEntries[index];
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                return Dismissible(
+                  key: Key(entry.date + entry.journal),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    _removeJournal(entries.indexOf(entry));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Entry dismissed')),
+                    );
+                  },
+                  background: Container(
+                    margin: EdgeInsets.only(right: 16.0),
+                    alignment: Alignment.centerRight,
                     decoration: BoxDecoration(
-                      color: entry.color,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          entry.date,
-                          style: TextStyle(color: Colors.grey),
+                        color: Colors.red,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          entry.journal,
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        if (entry.type == 'reflection') ...[
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Icon(Icons.delete, color: Colors.white),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Container(
+                      width: 400,
+                      decoration: BoxDecoration(
+                        color: entry.color,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            entry.date,
+                            style: TextStyle(color: Colors.grey),
+                          ),
                           SizedBox(height: 8),
                           Text(
-                            '${entry.prompt}',
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                            entry.journal,
+                            style: TextStyle(fontSize: 16),
                           ),
+                          if (entry.type == 'reflection') ...[
+                            SizedBox(height: 8),
+                            Text(
+                              '${entry.prompt}',
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.grey),
+                            ),
+                          ],
                         ],
-                      ],
+                      ),
                     ),
                   ),
                 );
