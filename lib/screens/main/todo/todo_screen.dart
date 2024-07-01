@@ -25,6 +25,19 @@ class _ToDoScreenState extends State<ToDoScreen> {
         emoji: '🚿'),
   ];
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Extract the argument passed through Navigator
+    final int? initialIndex =
+        ModalRoute.of(context)?.settings.arguments as int?;
+    if (initialIndex != null) {
+      setState(() {
+        _selectedIndex = initialIndex;
+      });
+    }
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
