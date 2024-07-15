@@ -49,8 +49,7 @@ class MotivationCard extends StatelessWidget {
       height: 178,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              'assets/images/bg.png'), // Replace with your background image path
+          image: AssetImage('assets/images/bg.png'),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(10),
