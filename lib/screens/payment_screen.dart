@@ -14,6 +14,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String hasError = '';
   String selectedPlan = 'Monthly'; // Initialize the selected plan
 
+  void successPage() {
+    Navigator.pushReplacementNamed(context, '/payment-success');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -244,6 +248,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   if (kDebugMode) {
                     print(response.toJson());
                   }
+                  successPage();
                 } else {
                   setState(() {
                     refId = '';
@@ -262,7 +267,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
               child: Container(
-                width: 350,
+                width: 300,
                 height: 45,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
@@ -291,16 +296,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
             ),
-            if (refId.isNotEmpty)
-              Center(
-                  child: Text('Console: Payment Success, Ref Id: $refId',
-                      textAlign: TextAlign.center)),
-            if (hasError.isNotEmpty)
-              Center(
-                  child: Text(
-                'Console: Payment Failed, Message: $hasError',
-                textAlign: TextAlign.center,
-              )),
             SizedBox(height: 16),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 14),

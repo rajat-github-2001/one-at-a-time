@@ -129,86 +129,89 @@ class _ReflectScreenState extends State<ReflectScreen> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ChoiceChip(
-                  label: Text(
-                    'All (${entries.length})',
-                    style: TextStyle(color: Colors.black),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ChoiceChip(
+                    label: Text(
+                      'All (${entries.length})',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    selected: selectedChipIndex == 0,
+                    selectedColor: Color(0xffD0F1FF),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    side: BorderSide(
+                      color: selectedChipIndex == 0
+                          ? Color(0xff3B3EDE)
+                          : Colors.grey,
+                      width: 2.0,
+                    ),
+                    onSelected: (bool selected) {
+                      setState(() {
+                        selectedChipIndex = 0;
+                      });
+                    },
                   ),
-                  selected: selectedChipIndex == 0,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
+                  SizedBox(
+                    width: 4,
                   ),
-                  side: BorderSide(
-                    color: selectedChipIndex == 0
-                        ? Color(0xff3B3EDE)
-                        : Colors.grey,
-                    width: 2.0,
+                  ChoiceChip(
+                    label: Text('Reflections',
+                        style: TextStyle(color: Colors.black)),
+                    selected: selectedChipIndex == 1,
+                    selectedColor: Color(0xffD0F1FF),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    side: BorderSide(
+                      color: selectedChipIndex == 1
+                          ? Color(0xff3B3EDE)
+                          : Colors.grey,
+                      width: 2.0,
+                    ),
+                    onSelected: (bool selected) {
+                      setState(() {
+                        selectedChipIndex = 1;
+                      });
+                    },
                   ),
-                  onSelected: (bool selected) {
-                    setState(() {
-                      selectedChipIndex = 0;
-                    });
-                  },
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                ChoiceChip(
-                  label: Text('Reflections',
-                      style: TextStyle(color: Colors.black)),
-                  selected: selectedChipIndex == 1,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
+                  SizedBox(
+                    width: 4,
                   ),
-                  side: BorderSide(
-                    color: selectedChipIndex == 1
-                        ? Color(0xff3B3EDE)
-                        : Colors.grey,
-                    width: 2.0,
+                  ChoiceChip(
+                    label: Text('Personal Diary',
+                        style: TextStyle(color: Colors.black)),
+                    selected: selectedChipIndex == 2,
+                    selectedColor: Color(0xffD0F1FF),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    side: BorderSide(
+                      color: selectedChipIndex == 2
+                          ? Color(0xff3B3EDE)
+                          : Colors.grey,
+                      width: 2.0,
+                    ),
+                    onSelected: (bool selected) {
+                      setState(() {
+                        selectedChipIndex = 2;
+                      });
+                    },
                   ),
-                  onSelected: (bool selected) {
-                    setState(() {
-                      selectedChipIndex = 1;
-                    });
-                  },
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-                ChoiceChip(
-                  label: Text('Personal Diary',
-                      style: TextStyle(color: Colors.black)),
-                  selected: selectedChipIndex == 2,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16.0),
+                  SizedBox(
+                    width: 4,
                   ),
-                  side: BorderSide(
-                    color: selectedChipIndex == 2
-                        ? Color(0xff3B3EDE)
-                        : Colors.grey,
-                    width: 2.0,
-                  ),
-                  onSelected: (bool selected) {
-                    setState(() {
-                      selectedChipIndex = 2;
-                    });
-                  },
-                ),
-                SizedBox(
-                  width: 4,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Padding(
@@ -233,7 +236,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    minimumSize: Size(260, 56),
+                    minimumSize: Size(210, 56),
                   ),
                 ),
                 Chip(
@@ -270,10 +273,10 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     margin: EdgeInsets.only(right: 16.0),
                     alignment: Alignment.centerRight,
                     decoration: BoxDecoration(
-                        color: Colors.red,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                        ),
+                      color: Colors.red,
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                    ),
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Icon(Icons.delete, color: Colors.white),
                   ),

@@ -25,19 +25,6 @@ class _ToDoScreenState extends State<ToDoScreen> {
         emoji: '🚿'),
   ];
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Extract the argument passed through Navigator
-    final int? initialIndex =
-        ModalRoute.of(context)?.settings.arguments as int?;
-    if (initialIndex != null) {
-      setState(() {
-        _selectedIndex = initialIndex;
-      });
-    }
-  }
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -186,22 +173,22 @@ class _MainContentState extends State<MainContent> {
     if (allCompleted) {
       return [
         _buildCalendarDay(
-            Image.asset('assets/icons/star-icon.png'), '30', true),
-        _buildCalendarDay('Tue', '01', false),
-        _buildCalendarDay('Wed', '02', false),
-        _buildCalendarDay('Thu', '03', false),
-        _buildCalendarDay('Fri', '04', false),
-        _buildCalendarDay('Sat', '05', false),
+            Image.asset('assets/icons/star-icon.png'), '18', true),
+        _buildCalendarDay('Fri', '19', false),
+        _buildCalendarDay('Sat', '20', false),
+        _buildCalendarDay('Sun', '21', false),
+        _buildCalendarDay('Mon', '22', false),
+        _buildCalendarDay('Tue', '23', false),
       ];
     }
 
     return [
-      _buildCalendarDay('Mon', '30', true),
-      _buildCalendarDay('Tue', '01', false),
-      _buildCalendarDay('Wed', '02', false),
-      _buildCalendarDay('Thu', '03', false),
-      _buildCalendarDay('Fri', '04', false),
-      _buildCalendarDay('Sat', '05', false),
+      _buildCalendarDay('Tue', '18', true),
+      _buildCalendarDay('Fri', '19', false),
+      _buildCalendarDay('Sat', '20', false),
+      _buildCalendarDay('Sun', '21', false),
+      _buildCalendarDay('Mon', '22', false),
+      _buildCalendarDay('Tue', '23', false),
     ];
   }
 

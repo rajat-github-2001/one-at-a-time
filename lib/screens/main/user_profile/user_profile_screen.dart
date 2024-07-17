@@ -292,6 +292,14 @@ class _SettingsSectionState extends State<SettingsSection> {
           leading: Icon(Icons.person),
           onTap: () => {Navigator.pushNamed(context, '/edituser')},
         ),
+        ListTile(
+          title: Text(
+            'Payment',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          leading: Icon(Icons.monetization_on),
+          onTap: () => {Navigator.pushNamed(context, '/payment')},
+        ),
         SwitchListTile(
           title: Text(
             'Notifications',
