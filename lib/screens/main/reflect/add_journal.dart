@@ -47,10 +47,12 @@ class _AddJournalState extends State<AddJournal> {
 
   void handleBackButton() {
     if (isWritingJournal || isWritingWithPrompt) {
-      setState(() {
-        isWritingJournal = false;
-        isWritingWithPrompt = false;
-      });
+      if (mounted) {
+        setState(() {
+          isWritingJournal = false;
+          isWritingWithPrompt = false;
+        });
+      }
     } else {
       Navigator.of(context).pop();
     }
@@ -137,6 +139,7 @@ class _AddJournalState extends State<AddJournal> {
                               ),
                             );
                             Navigator.of(context).pop();
+                            Navigator.pushReplacementNamed(context, '/payment');
                           },
                           child: Text(
                             'Finish!',

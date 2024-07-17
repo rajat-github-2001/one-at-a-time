@@ -15,7 +15,7 @@ class ToDoScreen extends StatefulWidget {
 }
 
 class _ToDoScreenState extends State<ToDoScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   final List<Task> _tasks = [
     Task(title: 'Run 4k', subtitle: 'All Day', emoji: '🏃‍♂️'),
     Task(

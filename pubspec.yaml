@@ -35,12 +35,16 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
-  flutter_svg: ^0.22.0
+  flutter_svg: 2.0.10+1
 
   provider: ^6.1.2
 
   emoji_picker_flutter: ^1.0.0
 
+  # flutter_inappwebview: ^5.4.4+3
+
+  uuid: ^3.0.6
+  fonepay_flutter: ^1.1.1
 
 dev_dependencies:
   flutter_test:
