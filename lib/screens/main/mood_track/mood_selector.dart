@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MoodSelector extends StatefulWidget {
   final Function(String) onMoodSelected;
 
-  MoodSelector({required this.onMoodSelected});
+  const MoodSelector({super.key, required this.onMoodSelected});
 
   @override
   _MoodSelectorState createState() => _MoodSelectorState();
@@ -21,14 +21,14 @@ class _MoodSelectorState extends State<MoodSelector> {
         widget.onMoodSelected(emoji);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         decoration: BoxDecoration(
-          color: _selectedEmoji == emoji ? Color(0XFF3B3EDE) : Colors.grey.shade200,
+          color: _selectedEmoji == emoji ? const Color(0XFF3B3EDE) : Colors.grey.shade200,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Text(
           emoji,
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
       ),
     );

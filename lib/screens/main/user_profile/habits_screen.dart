@@ -12,7 +12,7 @@ class AllHabitsPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.pushReplacementNamed(context, '/main', arguments: 3);
@@ -33,7 +33,7 @@ class AllHabitsPage extends StatelessWidget {
               showFireDates: false,
               showMoodDates: false,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             buildRecord(context),
           ],
         ),

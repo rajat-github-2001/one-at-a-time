@@ -58,7 +58,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
 
   void _showAddTaskModal(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Color.fromARGB(255, 241, 231, 224),
+        backgroundColor: const Color.fromARGB(255, 241, 231, 224),
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
@@ -90,23 +90,23 @@ class _ToDoScreenState extends State<ToDoScreen> {
       floatingActionButton: _selectedIndex == 0
           ? FloatingActionButton(
               onPressed: () => _showAddTaskModal(context),
+              backgroundColor: const Color(0XFF3B3EDE),
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
               ),
-              backgroundColor: Color(0XFF3B3EDE),
             )
           : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 
-  static List<Widget> _widgetOptions = <Widget>[
+  static final List<Widget> _widgetOptions = <Widget>[
     MainContent(
-        tasks: [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
-    MoodTrackScreen(),
-    ReflectScreen(),
-    UserProfileScreen(),
+        tasks: const [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
+    const MoodTrackScreen(),
+    const ReflectScreen(),
+    const UserProfileScreen(),
   ];
 }
 
@@ -215,9 +215,9 @@ class _MainContentState extends State<MainContent> {
             vertical: 4,
           ),
           decoration: BoxDecoration(
-              color: isSelected ? Color(0XFF3B3EDE) : Colors.transparent,
+              color: isSelected ? const Color(0XFF3B3EDE) : Colors.transparent,
               shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(20))),
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
           child: Column(
             children: [
               day is String
@@ -262,12 +262,12 @@ class _MainContentState extends State<MainContent> {
       },
       background: Container(
         alignment: Alignment.centerRight,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.red,
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(16.0))),
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Icon(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: const Icon(
           Icons.delete,
           color: Colors.white,
         ),
@@ -278,12 +278,12 @@ class _MainContentState extends State<MainContent> {
           child: ListTile(
             leading: Text(
               task.emoji,
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
             trailing: IconButton(
               icon: task.isCompleted
-                  ? Icon(Icons.check_circle, color: Colors.green)
-                  : Icon(Icons.radio_button_unchecked),
+                  ? const Icon(Icons.check_circle, color: Colors.green)
+                  : const Icon(Icons.radio_button_unchecked),
               onPressed: () {
                 widget.toggleTaskCompletion(index);
               },

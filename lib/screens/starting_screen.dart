@@ -62,7 +62,8 @@ class StartingScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/main');
+                        Navigator.pushReplacementNamed(context, '/main',
+                            arguments: 0);
                       },
                       label: const Text(
                         "Let's Start",

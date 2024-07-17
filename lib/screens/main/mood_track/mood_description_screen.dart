@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:one_at_a_time/providers/mood_card.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:provider/provider.dart';
+import 'package:one_at_a_time/providers/mood_card.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'mood_screen.dart';
 import 'package:one_at_a_time/widget/finish_dialog.dart';
 
@@ -64,7 +67,7 @@ class _MoodDescriptionScreenState extends State<MoodDescriptionScreen> {
                 ],
               ),
               SizedBox(height: 20),
-              Container(
+              SizedBox(
                 width: 100,
                 height: 100,
                 child: Center(child: Image.asset(widget.moodData.assetPath)),
@@ -131,6 +134,7 @@ class _MoodDescriptionScreenState extends State<MoodDescriptionScreen> {
 
 class MoodReasonScreen extends StatefulWidget {
   final MoodData moodData;
+
   const MoodReasonScreen({super.key, required this.moodData});
 
   @override
@@ -139,17 +143,59 @@ class MoodReasonScreen extends StatefulWidget {
 
 class _MoodReasonScreenState extends State<MoodReasonScreen> {
   Set<String> selectedItems = {};
+  final storage = FlutterSecureStorage();
 
-  void _onButtonPressed() {
-    context.read<MoodCard>().updateMood();
-    Navigator.of(context).popUntil((route) => route.isFirst);
-    Navigator.pushReplacementNamed(context, '/main', arguments: 1);
-    updateMoodCardText(widget.moodData.text);
+  void _onButtonPressed() async {
+    try {
+      // Retrieve auth token from secure storage
+      final authToken = await storage.read(key: 'authToken');
+      if (authToken == null) {
+        throw Exception('No authToken found');
+      }
+
+      context.read<MoodCard>().updateMood();
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacementNamed(context, '/main', arguments: 1);
+      updateMoodCardText(widget.moodData.text);
+
+      // Prepare data to be sent
+      final dataFill = {
+        "data": {
+          'moodStatus': widget.moodData.title,
+          'moodIconUrl': widget.moodData.assetPath,
+          'trackedDate': DateTime.now().toIso8601String(),
+          // Add more data fields as needed
+        }
+      };
+
+      final data = jsonEncode(dataFill);
+
+      print("data: $data");
+
+      // Send data to Strapi backend with authentication headers
+      final response = await http.post(
+        Uri.parse('http://localhost:1337/api/moods'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $authToken', // Include auth token in headers
+        },
+        body: data,
+      );
+
+      if (response.statusCode == 200) {
+        // Request was successful
+        print('Data sent successfully');
+      } else {
+        // There was an error
+        print('Failed to send data: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Error occurred while sending data: $e');
+    }
   }
 
   void updateMoodCardText(String moodData) {
-    // MoodCard moodCard =
-    //     MoodCard(); // Assuming you have an instance or access to MoodCard
     context.read<MoodCard>().updateMoodText(moodData);
   }
 
@@ -203,6 +249,7 @@ class _MoodReasonScreenState extends State<MoodReasonScreen> {
       'label': 'News',
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

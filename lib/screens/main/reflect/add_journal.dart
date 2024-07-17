@@ -60,7 +60,7 @@ class _AddJournalState extends State<AddJournal> {
     if (isWritingJournal || isWritingWithPrompt) {
       showModalBottomSheet(
         context: context,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
         ),
         builder: (BuildContext context) {
@@ -82,17 +82,17 @@ class _AddJournalState extends State<AddJournal> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
+                    const Text(
                       'Finish?',
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 8),
-                    Text(
+                    const SizedBox(height: 8),
+                    const Text(
                       'Finished with your journal??',
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-                    SizedBox(height: 24),
+                    const SizedBox(height: 24),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -100,11 +100,11 @@ class _AddJournalState extends State<AddJournal> {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('No.'),
                           style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.all(20.0),
-                            side: BorderSide(color: Color(0xff3B3EDE)),
+                            padding: const EdgeInsets.all(20.0),
+                            side: const BorderSide(color: Color(0xff3B3EDE)),
                           ),
+                          child: const Text('No.'),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -118,7 +118,7 @@ class _AddJournalState extends State<AddJournal> {
                                 ? 'Write down three of the best things you’ve accomplished so far.'
                                 : null;
                             Color color = isWritingWithPrompt
-                                ? Color(0xffF8F2EB)
+                                ? const Color(0xffF8F2EB)
                                 : getRandomColor();
 
                             Entry newEntry = Entry(
@@ -132,23 +132,23 @@ class _AddJournalState extends State<AddJournal> {
                             widget.onJournalAdd(newEntry);
                             Navigator.of(context).pop();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text('Your journal has been added'),
                               ),
                             );
                             Navigator.of(context).pop();
                           },
-                          child: Text(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xff3B3EDE),
+                            padding: const EdgeInsets.all(20.0),
+                          ),
+                          child: const Text(
                             'Finish!',
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xff3B3EDE),
-                            padding: EdgeInsets.all(20.0),
                           ),
                         ),
                       ],
@@ -168,7 +168,7 @@ class _AddJournalState extends State<AddJournal> {
     return FractionallySizedBox(
       heightFactor: 0.95,
       child: Padding(
-        padding: EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -180,13 +180,13 @@ class _AddJournalState extends State<AddJournal> {
                   icon: Image.asset('assets/icons/back.png'),
                 ),
                 Text(formattedDate,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     )),
                 TextButton(
                   onPressed: handleDoneButton,
-                  child: Text(
+                  child: const Text(
                     'Done',
                     style: TextStyle(
                         color: Color(0xff3B3EDE),
@@ -196,7 +196,7 @@ class _AddJournalState extends State<AddJournal> {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (!isWritingWithPrompt && !isWritingJournal) ...[
               GestureDetector(
                 onTap: () {
@@ -205,12 +205,12 @@ class _AddJournalState extends State<AddJournal> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Color(0xffF8F2EB),
+                    color: const Color(0xffF8F2EB),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  child: Column(
+                  child: const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
@@ -227,15 +227,15 @@ class _AddJournalState extends State<AddJournal> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'OR',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -244,12 +244,12 @@ class _AddJournalState extends State<AddJournal> {
                 },
                 child: Container(
                   alignment: Alignment.topLeft,
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Color(0xffF8F2EB),
+                    color: const Color(0xffF8F2EB),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Just start writing...',
                     style: TextStyle(
                       fontSize: 16,
@@ -265,23 +265,23 @@ class _AddJournalState extends State<AddJournal> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(16.0),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: const BoxDecoration(
                         color: Color(0xffF8F2EB),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Write down three of the best things you’ve accomplished so far.',
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w400),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: TextField(
                         controller: promptController,
                         maxLines: null,
                         expands: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Start writing your reflections here...',
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.all(8.0),
@@ -302,7 +302,7 @@ class _AddJournalState extends State<AddJournal> {
                         controller: journalController,
                         maxLines: null,
                         expands: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: 'Start writing your journal here...',
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(8.0)),

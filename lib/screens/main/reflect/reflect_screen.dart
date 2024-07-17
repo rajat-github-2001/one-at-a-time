@@ -16,7 +16,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '24 May 2023',
       journal: 'Feeling Sad',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What made you feel this way?',
     ),
     Entry(
@@ -29,7 +29,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '22 May 2023',
       journal: 'Feeling motivated and ready to tackle new challenges!',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What challenges are you planning to tackle?',
     ),
     Entry(
@@ -42,7 +42,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '20 May 2023',
       journal: 'Feeling anxious about upcoming exams.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What can you do to reduce your anxiety?',
     ),
     Entry(
@@ -55,7 +55,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '18 May 2023',
       journal: 'Feeling grateful for my family and friends.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What specific things are you grateful for?',
     ),
     Entry(
@@ -68,7 +68,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '16 May 2023',
       journal: 'Feeling tired but accomplished after a productive day.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What did you accomplish today?',
     ),
     Entry(
@@ -122,7 +122,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('For happier you!'),
+        title: const Text('For happier you!'),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -137,17 +137,17 @@ class _ReflectScreenState extends State<ReflectScreen> {
                 ChoiceChip(
                   label: Text(
                     'All (${entries.length})',
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                   selected: selectedChipIndex == 0,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                  selectedColor: const Color(0xffD0F1FF),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   side: BorderSide(
                     color: selectedChipIndex == 0
-                        ? Color(0xff3B3EDE)
+                        ? const Color(0xff3B3EDE)
                         : Colors.grey,
                     width: 2.0,
                   ),
@@ -157,21 +157,21 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 ChoiceChip(
-                  label: Text('Reflections',
+                  label: const Text('Reflections',
                       style: TextStyle(color: Colors.black)),
                   selected: selectedChipIndex == 1,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                  selectedColor: const Color(0xffD0F1FF),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   side: BorderSide(
                     color: selectedChipIndex == 1
-                        ? Color(0xff3B3EDE)
+                        ? const Color(0xff3B3EDE)
                         : Colors.grey,
                     width: 2.0,
                   ),
@@ -181,21 +181,21 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
                 ChoiceChip(
-                  label: Text('Personal Diary',
+                  label: const Text('Personal Diary',
                       style: TextStyle(color: Colors.black)),
                   selected: selectedChipIndex == 2,
-                  selectedColor: Color(0xffD0F1FF),
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                  selectedColor: const Color(0xffD0F1FF),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
                   side: BorderSide(
                     color: selectedChipIndex == 2
-                        ? Color(0xff3B3EDE)
+                        ? const Color(0xff3B3EDE)
                         : Colors.grey,
                     width: 2.0,
                   ),
@@ -205,7 +205,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 4,
                 ),
               ],
@@ -220,8 +220,8 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   onPressed: () {
                     _showNewEntryModal(context);
                   },
-                  icon: Icon(Icons.edit),
-                  label: Text('New Entry',
+                  icon: const Icon(Icons.edit),
+                  label: const Text('New Entry',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -233,16 +233,16 @@ class _ReflectScreenState extends State<ReflectScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    minimumSize: Size(260, 56),
+                    minimumSize: const Size(260, 56),
                   ),
                 ),
                 Chip(
-                  label: Text('4d Streak'),
+                  label: const Text('4d Streak'),
                   avatar: Image.asset('assets/icons/fire.png'),
                   backgroundColor: Colors.white,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-                  side: BorderSide(color: Colors.transparent),
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  side: const BorderSide(color: Colors.transparent),
                   elevation: 1.0,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
@@ -263,19 +263,19 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   onDismissed: (direction) {
                     _removeJournal(entries.indexOf(entry));
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Entry dismissed')),
+                      const SnackBar(content: Text('Entry dismissed')),
                     );
                   },
                   background: Container(
-                    margin: EdgeInsets.only(right: 16.0),
+                    margin: const EdgeInsets.only(right: 16.0),
                     alignment: Alignment.centerRight,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.red,
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.all(Radius.circular(16.0)),
                         ),
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Icon(Icons.delete, color: Colors.white),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
@@ -292,19 +292,19 @@ class _ReflectScreenState extends State<ReflectScreen> {
                         children: [
                           Text(
                             entry.date,
-                            style: TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.grey),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             entry.journal,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           if (entry.type == 'reflection') ...[
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               '${entry.prompt}',
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                                  const TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                           ],
                         ],
