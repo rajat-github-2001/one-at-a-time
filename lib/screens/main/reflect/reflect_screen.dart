@@ -16,7 +16,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '24 May 2023',
       journal: 'Feeling Sad',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What made you feel this way?',
     ),
     Entry(
@@ -29,7 +29,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '22 May 2023',
       journal: 'Feeling motivated and ready to tackle new challenges!',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What challenges are you planning to tackle?',
     ),
     Entry(
@@ -42,7 +42,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '20 May 2023',
       journal: 'Feeling anxious about upcoming exams.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What can you do to reduce your anxiety?',
     ),
     Entry(
@@ -55,7 +55,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '18 May 2023',
       journal: 'Feeling grateful for my family and friends.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What specific things are you grateful for?',
     ),
     Entry(
@@ -68,7 +68,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
       date: '16 May 2023',
       journal: 'Feeling tired but accomplished after a productive day.',
       type: 'reflection',
-      color: Color(0xffF8F2EB),
+      color: const Color(0xffF8F2EB),
       prompt: 'What did you accomplish today?',
     ),
     Entry(
@@ -122,7 +122,7 @@ class _ReflectScreenState extends State<ReflectScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('For happier you!'),
+        title: const Text('For happier you!'),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -223,8 +223,8 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   onPressed: () {
                     _showNewEntryModal(context);
                   },
-                  icon: Icon(Icons.edit),
-                  label: Text('New Entry',
+                  icon: const Icon(Icons.edit),
+                  label: const Text('New Entry',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -240,12 +240,12 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   ),
                 ),
                 Chip(
-                  label: Text('4d Streak'),
+                  label: const Text('4d Streak'),
                   avatar: Image.asset('assets/icons/fire.png'),
                   backgroundColor: Colors.white,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-                  side: BorderSide(color: Colors.transparent),
+                      const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                  side: const BorderSide(color: Colors.transparent),
                   elevation: 1.0,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
@@ -266,11 +266,11 @@ class _ReflectScreenState extends State<ReflectScreen> {
                   onDismissed: (direction) {
                     _removeJournal(entries.indexOf(entry));
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Entry dismissed')),
+                      const SnackBar(content: Text('Entry dismissed')),
                     );
                   },
                   background: Container(
-                    margin: EdgeInsets.only(right: 16.0),
+                    margin: const EdgeInsets.only(right: 16.0),
                     alignment: Alignment.centerRight,
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -295,19 +295,19 @@ class _ReflectScreenState extends State<ReflectScreen> {
                         children: [
                           Text(
                             entry.date,
-                            style: TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.grey),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             entry.journal,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           if (entry.type == 'reflection') ...[
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               '${entry.prompt}',
                               style:
-                                  TextStyle(fontSize: 14, color: Colors.grey),
+                                  const TextStyle(fontSize: 14, color: Colors.grey),
                             ),
                           ],
                         ],

@@ -23,7 +23,7 @@ class _MoodTrackScreenState extends State<MoodTrackScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
-          content: Container(
+          content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             height: MediaQuery.of(context).size.height * 0.3,
             child: Stack(

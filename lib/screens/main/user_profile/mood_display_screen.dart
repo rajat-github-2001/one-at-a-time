@@ -63,7 +63,7 @@ class AllMoodsPage extends StatelessWidget {
       color: Color(0xFFF8F2EB),
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: ListTile(
-        leading: Container(width: 36, height: 36, child: Image.asset(icon)),
+        leading: SizedBox(width: 36, height: 36, child: Image.asset(icon)),
         title: Text(
           mood,
           style: Theme.of(context).textTheme.bodyMedium,

@@ -13,7 +13,7 @@ class AllJournalsPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).popUntil((route) => route.isFirst);
             Navigator.pushReplacementNamed(context, '/main', arguments: 3);
@@ -34,7 +34,7 @@ class AllJournalsPage extends StatelessWidget {
               showStarDates: false,
               showMoodDates: false,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             buildRecord(context),
           ],
         ),

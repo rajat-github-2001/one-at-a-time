@@ -160,6 +160,7 @@ class _MoodScreenState extends State<MoodScreen> {
 
 class MoodData {
   final List<String> description;
+  final String title;
   final String assetPath;
   final Color backgroundColor;
   final Color selectedColor;
@@ -172,10 +173,12 @@ class MoodData {
       required this.backgroundColor,
       required this.selectedColor,
       required this.shareQuestion,
+      required this.title,
       required this.text});
 }
 
 final MoodData happyMoodData = MoodData(
+    title: 'Amazing',
     description: [
       'Relaxed',
       'Energetic',
@@ -195,6 +198,7 @@ final MoodData happyMoodData = MoodData(
     text: 'Keep doing amazing!');
 
 final MoodData surprisedMoodData = MoodData(
+    title: 'Good',
     description: [
       'Comfortable',
       'Hopeful',
@@ -214,6 +218,7 @@ final MoodData surprisedMoodData = MoodData(
     text: 'Better days ahead');
 
 final MoodData sadMoodData = MoodData(
+  title: 'Not Great',
   description: [
     'Confused',
     'Frustrated',
@@ -234,6 +239,7 @@ final MoodData sadMoodData = MoodData(
 );
 
 final MoodData angerMoodData = MoodData(
+    title: 'Bad',
     description: [
       'Hurt',
       'Disrespected',

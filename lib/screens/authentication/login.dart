@@ -1,21 +1,77 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _passwordObscured = true;
   bool _rememberMe = false;
+  final storage = FlutterSecureStorage();
 
   @override
   void dispose() {
+    _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loginUser() async {
+    final String username = _usernameController.text.trim();
+    final String password = _passwordController.text;
+
+    if (username.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
+    }
+
+    try {
+      final response = await http.post(
+        Uri.parse(
+            'http://localhost:1337/api/auth/local'), // Replace with your Strapi login URL
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'identifier': username,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        final String authToken = responseData['jwt']; // Extract the JWT token
+
+        // Store the authentication token securely
+        await storage.write(key: 'authToken', value: authToken);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login successful')),
+        );
+        Navigator.pushReplacementNamed(
+            context, '/profile'); // Navigate to profile screen
+      } else {
+        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed: No User Found.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
   }
 
   @override
@@ -44,9 +100,7 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 62,
-            ),
+            const SizedBox(height: 62),
             const Text(
               'Welcome Back!',
               textAlign: TextAlign.center,
@@ -57,9 +111,7 @@ class _LoginState extends State<Login> {
                 letterSpacing: 1.50,
               ),
             ),
-            const SizedBox(
-              height: 46,
-            ),
+            const SizedBox(height: 46),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),
               child: ElevatedButton.icon(
@@ -77,15 +129,16 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                 style: TextButton.styleFrom(
-                    backgroundColor: const Color(0XFFFBFEFB),
-                    elevation: 5,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 37, vertical: 22)),
+                  backgroundColor: const Color(0XFFFBFEFB),
+                  elevation: 5,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 37,
+                    vertical: 22,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Row(
@@ -116,30 +169,31 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Container(
               margin: const EdgeInsets.only(top: 12, left: 20, right: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Username',
-                      style: TextStyle(
-                        color: Color(0XFF898D9E),
-                        fontSize: 14,
-                      )),
-                  const SizedBox(
-                    height: 4,
+                  const Text(
+                    'Username',
+                    style: TextStyle(
+                      color: Color(0XFF898D9E),
+                      fontSize: 14,
+                    ),
                   ),
+                  const SizedBox(height: 4),
                   TextField(
+                    controller: _usernameController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0XFFFBFEFB),
                       contentPadding: const EdgeInsets.all(15),
-                      hintText: "Type in your username",
+                      hintText: 'Type in your username',
                       hintStyle: const TextStyle(
-                          color: Color(0XFF898D9E), fontSize: 14),
+                        color: Color(0XFF898D9E),
+                        fontSize: 14,
+                      ),
                       prefixIcon: const Padding(
                         padding: EdgeInsets.all(16),
                         child: Icon(
@@ -148,8 +202,9 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide.none),
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                   ),
                 ],
@@ -160,23 +215,25 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Password',
-                      style: TextStyle(
-                        color: Color(0XFF898D9E),
-                        fontSize: 14,
-                      )),
-                  const SizedBox(
-                    height: 4,
+                  const Text(
+                    'Password',
+                    style: TextStyle(
+                      color: Color(0XFF898D9E),
+                      fontSize: 14,
+                    ),
                   ),
+                  const SizedBox(height: 4),
                   TextField(
                     controller: _passwordController,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color(0XFFFBFEFB),
                       contentPadding: const EdgeInsets.all(15),
-                      hintText: "Place the password here",
+                      hintText: 'Place the password here',
                       hintStyle: const TextStyle(
-                          color: Color(0XFF898D9E), fontSize: 14),
+                        color: Color(0XFF898D9E),
+                        fontSize: 14,
+                      ),
                       prefixIcon: const Padding(
                         padding: EdgeInsets.all(16),
                         child: Icon(
@@ -201,8 +258,9 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide.none),
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                     obscureText: _passwordObscured,
                   ),
@@ -215,9 +273,9 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
                         GestureDetector(
                           onTap: () {
                             setState(() {
@@ -233,9 +291,7 @@ class _LoginState extends State<Login> {
                                 : Colors.white,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
+                        const SizedBox(width: 10),
                         const Text(
                           'Remember Me',
                           style: TextStyle(
@@ -244,29 +300,28 @@ class _LoginState extends State<Login> {
                             fontWeight: FontWeight.w400,
                           ),
                         )
-                      ])),
+                      ],
+                    ),
+                  ),
                   TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Forgot your password?',
-                        style: TextStyle(
-                          color: Color(0XFF3B3EDE),
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ))
+                    onPressed: () {},
+                    child: const Text(
+                      'Forgot your password?',
+                      style: TextStyle(
+                        color: Color(0XFF3B3EDE),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
-            const SizedBox(
-              height: 24,
-            ),
+            const SizedBox(height: 24),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/profile');
-                },
+                onPressed: _loginUser,
                 label: const Text(
                   'Login',
                   style: TextStyle(
@@ -280,18 +335,17 @@ class _LoginState extends State<Login> {
                   color: Colors.white,
                 ),
                 style: TextButton.styleFrom(
-                    backgroundColor: const Color(0XFF3B3EDE),
-                    elevation: 5,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    shadowColor: const Color(0XFF3B3EDE).withOpacity(0.20)),
+                  backgroundColor: const Color(0XFF3B3EDE),
+                  elevation: 5,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  shadowColor: const Color(0XFF3B3EDE).withOpacity(0.20),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 42,
-            ),
+            const SizedBox(height: 42),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
@@ -299,9 +353,7 @@ class _LoginState extends State<Login> {
                 thickness: 1,
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

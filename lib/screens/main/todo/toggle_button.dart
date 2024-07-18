@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ToggleButton extends StatefulWidget {
   final ValueChanged<bool> onToggle;
 
-  ToggleButton({required this.onToggle});
+  const ToggleButton({super.key, required this.onToggle});
 
   @override
   _ToggleButtonState createState() => _ToggleButtonState();
@@ -34,12 +34,12 @@ class _ToggleButtonState extends State<ToggleButton> {
           children: [
             AnimatedAlign(
               alignment: isToggled ? Alignment.centerRight : Alignment.centerLeft,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.easeInOut,
               child: Container(
                 width: 24,
                 height: 24,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
                 ),

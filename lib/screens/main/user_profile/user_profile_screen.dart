@@ -252,7 +252,7 @@ class CalendarGrid extends StatelessWidget {
                 : isFireDate
                     ? Image.asset('assets/icons/fire.png')
                     : isMoodDate
-                        ? Container(width: 32, height: 32, child: moodImage)
+                        ? SizedBox(width: 32, height: 32, child: moodImage)
                         : Text(
                             '$day',
                             style: Theme.of(context).textTheme.bodySmall,

@@ -29,7 +29,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pushReplacementNamed(context, '/main');
           },
         ),
       ),
@@ -261,6 +261,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFFBFEFB),
+                elevation: 0,
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
