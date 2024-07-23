@@ -16,6 +16,7 @@ import './screens/authentication/signup.dart';
 import 'screens/profile_screen.dart';
 import './screens/payment_screen.dart';
 import './screens//payment_success_screen.dart';
+import './screens/subscription_detail_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           '/moods': (context) => const AllMoodsPage(),
           '/payment': (context) => const PaymentScreen(),
           '/payment-success': (context) => const PaymentSuccessScreen(),
+          '/subscription': (context) => const SubscriptionScreen(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Euclid Circular A'),

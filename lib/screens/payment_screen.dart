@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fonepay_flutter/fonepay_flutter.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -14,17 +15,35 @@ class _PaymentScreenState extends State<PaymentScreen> {
   String hasError = '';
   String selectedPlan = 'Monthly'; // Initialize the selected plan
 
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectedPlan();
+  }
+
+  Future<void> _loadSelectedPlan() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      selectedPlan = prefs.getString('selectedPlan') ?? 'Monthly';
+    });
+  }
+
+  Future<void> _saveSelectedPlan(String plan) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedPlan', plan);
+  }
+
   void successPage() {
-    Navigator.pushReplacementNamed(context, '/payment-success');
+    Navigator.pushReplacementNamed(context, '/subscription');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xff3B3EDE),
+        backgroundColor: const Color(0xff3B3EDE),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.white,
           ),
@@ -33,20 +52,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
           },
         ),
       ),
-      backgroundColor: Color(0xff3B3EDE),
+      backgroundColor: const Color(0xff3B3EDE),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: Container(
                 child: Image.asset('assets/icons/payment-icons.png'),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Invest in a happy brain',
               style: TextStyle(
                 color: Colors.white,
@@ -55,9 +74,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 letterSpacing: 0.24,
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             Column(
-              children: [
+              children: const [
                 Text(
                   '7x increase in focus',
                   style: TextStyle(
@@ -87,20 +106,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             GestureDetector(
               onTap: () {
                 setState(() {
                   selectedPlan = 'Annual';
                 });
+                _saveSelectedPlan('Annual');
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                padding: EdgeInsets.all(20),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: selectedPlan == 'Annual'
-                      ? Color(0xffD0F1FF)
-                      : Color(0x33E5E6EE),
+                      ? const Color(0xffD0F1FF)
+                      : const Color(0x33E5E6EE),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: selectedPlan == 'Annual'
@@ -119,8 +139,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           'Annual',
                           style: TextStyle(
                             color: selectedPlan == 'Annual'
-                                ? Color(0xFF0D1B1E)
-                                : Color(0xFFE5E6EE),
+                                ? const Color(0xFF0D1B1E)
+                                : const Color(0xFFE5E6EE),
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.24,
@@ -131,12 +151,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           height: 26,
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           decoration: ShapeDecoration(
-                            color: Color(0xFF78B389),
+                            color: const Color(0xFF78B389),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -154,13 +174,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'First 30 days free - Then NPR 5k/Year',
                       style: TextStyle(
                         color: selectedPlan == 'Annual'
-                            ? Color(0xFF0D1B1E)
-                            : Color(0xFFE5E6EE),
+                            ? const Color(0xFF0D1B1E)
+                            : const Color(0xFFE5E6EE),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0.17,
@@ -170,20 +190,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             GestureDetector(
               onTap: () {
                 setState(() {
                   selectedPlan = 'Monthly';
                 });
+                _saveSelectedPlan('Monthly');
               },
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                padding: EdgeInsets.all(20),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   color: selectedPlan == 'Monthly'
-                      ? Color(0xffD0F1FF)
-                      : Color(0x33E5E6EE),
+                      ? const Color(0xffD0F1FF)
+                      : const Color(0x33E5E6EE),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: selectedPlan == 'Monthly'
@@ -202,8 +223,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           'Monthly',
                           style: TextStyle(
                             color: selectedPlan == 'Monthly'
-                                ? Color(0xFF0D1B1E)
-                                : Color(0xFFE5E6EE),
+                                ? const Color(0xFF0D1B1E)
+                                : const Color(0xFFE5E6EE),
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.24,
@@ -211,13 +232,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       'First 7 days free - Then NPR 500/Month',
                       style: TextStyle(
                         color: selectedPlan == 'Monthly'
-                            ? Color(0xFF0D1B1E)
-                            : Color(0xFFE5E6EE),
+                            ? const Color(0xFF0D1B1E)
+                            : const Color(0xFFE5E6EE),
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0.17,
@@ -227,7 +248,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () async {
                 final result = await FonePay.i.init(
@@ -248,6 +269,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   if (kDebugMode) {
                     print(response.toJson());
                   }
+                  await _saveSelectedPlan(selectedPlan);
                   successPage();
                 } else {
                   setState(() {
@@ -260,9 +282,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFFBFEFB),
+                backgroundColor: const Color(0xFFFBFEFB),
                 elevation: 0,
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -275,10 +297,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 decoration: ShapeDecoration(
                   color: Color(0xFFFBFEFB),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -297,10 +319,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 14),
-              child: Text.rich(
+              margin: const EdgeInsets.symmetric(horizontal: 14),
+              child: const Text.rich(
                 TextSpan(
                   children: [
                     TextSpan(
