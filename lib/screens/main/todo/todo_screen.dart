@@ -37,6 +37,18 @@ class _ToDoScreenState extends State<ToDoScreen> {
     });
   }
 
+    @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final int? initialIndex =
+        ModalRoute.of(context)?.settings.arguments as int?;
+    if (initialIndex != null) {
+      setState(() {
+        _selectedIndex = initialIndex;
+      });
+    }
+  }
+
   void _toggleTaskCompletion(int index) {
     setState(() {
       _tasks[index].isCompleted = !_tasks[index].isCompleted;
