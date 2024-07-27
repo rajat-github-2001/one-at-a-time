@@ -7,6 +7,7 @@ import 'package:one_at_a_time/screens/main/user_profile/habits_screen.dart';
 import 'package:one_at_a_time/screens/main/user_profile/journal_screen.dart';
 import 'package:one_at_a_time/screens/main/user_profile/mood_display_screen.dart';
 import 'package:one_at_a_time/screens/starting_screen.dart';
+import 'package:one_at_a_time/screens/subscription_info.dart';
 import 'package:provider/provider.dart';
 import './screens/main/todo/todo_screen.dart';
 import './screens/onboarding_screen.dart';
@@ -16,6 +17,7 @@ import './screens/authentication/signup.dart';
 import 'screens/profile_screen.dart';
 import './screens/payment_screen.dart';
 import './screens//payment_success_screen.dart';
+import './screens/main/meditation/meditation.dart';
 import './screens/subscription_detail_screen.dart';
 
 void main() {
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
           '/moods': (context) => const AllMoodsPage(),
           '/payment': (context) => const PaymentScreen(),
           '/payment-success': (context) => const PaymentSuccessScreen(),
+          '/subinfo': (context) => const SubscriptionPage(),
+          '/meditation': (context) => const MeditationPage(),
           '/subscription': (context) => const SubscriptionScreen(),
         },
         debugShowCheckedModeBanner: false,

@@ -39,16 +39,21 @@ class SubscriptionScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 16),
-                  Image.asset('assets/images/logo-sample.png'),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'One Step At a Time',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Column(
+                    children: [
+                      Image.asset('assets/images/logo-sample.png'),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'One Step At a Time',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   Container(
@@ -62,7 +67,9 @@ class SubscriptionScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.upload_outlined),
-                                SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 const Text('Plan type: ',
                                     style: TextStyle(fontSize: 16)),
                               ],
@@ -79,7 +86,9 @@ class SubscriptionScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.calendar_today_outlined),
-                                SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 const Text('Duration: ',
                                     style: TextStyle(fontSize: 16)),
                               ],
@@ -93,10 +102,12 @@ class SubscriptionScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                           Row(
+                            Row(
                               children: [
                                 Icon(Icons.play_circle_fill_outlined),
-                                SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 const Text('Status: ',
                                     style: TextStyle(fontSize: 16)),
                               ],
@@ -111,7 +122,9 @@ class SubscriptionScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.switch_access_shortcut),
-                                SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 const Text('Renew date: ',
                                     style: TextStyle(fontSize: 16)),
                               ],
@@ -128,7 +141,9 @@ class SubscriptionScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.money),
-                                SizedBox(width: 5,),
+                                SizedBox(
+                                  width: 5,
+                                ),
                                 const Text('Amount: ',
                                     style: TextStyle(fontSize: 16)),
                               ],

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:one_at_a_time/providers/mood_card.dart';
+import 'package:one_at_a_time/screens/main/meditation/meditation.dart';
 import 'package:provider/provider.dart';
 import './mood_selector.dart';
 
@@ -173,6 +174,16 @@ class _MoodTrackScreenState extends State<MoodTrackScreen> {
             MotivationCard(),
             SizedBox(height: 30),
             FeelingSection(),
+            SizedBox(height: 30),
+            Text('For You',
+                style: TextStyle(
+                    fontFamily: 'Euclid Circular A',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold)),
+            SizedBox(
+              height: 8,
+            ),
+            ForYouSection(),
             // Center(
             //   child: ElevatedButton(
             //     onPressed: _showMoodDialog,
@@ -356,6 +367,90 @@ class _FeelingSectionState extends State<FeelingSection> {
                   color: Colors.black54,
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ForYouSection extends StatelessWidget {
+  const ForYouSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/meditation'),
+      child: Container(
+        width: 358,
+        height: 156,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                'assets/images/read.png'), // Replace with your background image path
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Let it go',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'Don\'t Judge Yourself',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+            ),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Image.asset(
+                    'assets/icons/play.png',
+                    width: 48,
+                    height: 21,
+                  ),
+                ),
+                Image.asset(
+                  'assets/icons/ten.png',
+                  width: 38,
+                  height: 15,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: Image.asset(
+                    'assets/icons/tracks.png',
+                    width: 54,
+                    height: 14,
+                  ),
+                ),
+                Image.asset(
+                  'assets/icons/reads.png',
+                  width: 58,
+                  height: 14,
+                ),
+              ],
             ),
           ],
         ),

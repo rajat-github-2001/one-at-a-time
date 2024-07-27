@@ -25,6 +25,22 @@ class _ToDoScreenState extends State<ToDoScreen> {
         emoji: '🚿'),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final args = ModalRoute.of(context)?.settings.arguments as int?;
+    if (args != null) {
+      setState(() {
+        _selectedIndex = args;
+      });
+    }
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -35,18 +51,6 @@ class _ToDoScreenState extends State<ToDoScreen> {
     setState(() {
       _tasks.add(task);
     });
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final int? initialIndex =
-        ModalRoute.of(context)?.settings.arguments as int?;
-    if (initialIndex != null) {
-      setState(() {
-        _selectedIndex = initialIndex;
-      });
-    }
   }
 
   void _toggleTaskCompletion(int index) {
@@ -130,6 +134,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: _selectedIndex == 0
             ? MainContent(

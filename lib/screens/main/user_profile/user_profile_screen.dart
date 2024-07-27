@@ -28,7 +28,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16.0),
+                  padding: const EdgeInsets.only(left: 22.0),
                   child: Text(
                     'Habit Stat',
                     style: Theme.of(context)
@@ -63,7 +63,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                  padding: const EdgeInsets.only(left: 22.0, top: 16.0),
                   child: Text(
                     'Mood Stat',
                     style: Theme.of(context)
@@ -98,7 +98,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                  padding: const EdgeInsets.only(left: 22.0, top: 16.0),
                   child: Text(
                     'Journal Stat',
                     style: Theme.of(context)
@@ -152,7 +152,7 @@ class StatWidget extends StatelessWidget {
     return Card(
       color: Colors.white,
       elevation: 4,
-      margin: EdgeInsets.all(16),
+      margin: EdgeInsets.all(22),
       child: Column(
         children: [
           Row(
@@ -266,89 +266,128 @@ class CalendarGrid extends StatelessWidget {
 
 class SettingsSection extends StatefulWidget {
   const SettingsSection({super.key});
+
   @override
   State<SettingsSection> createState() => _SettingsSectionState();
 }
 
 class _SettingsSectionState extends State<SettingsSection> {
-  bool _notificationStatus = false;
+  bool _notificationStatus = true;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListTile(
-            title: Text(
-          'Settings',
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
-        )),
-        ListTile(
-          title: Text(
-            'Edit Profile',
-            style: Theme.of(context).textTheme.bodyMedium,
+        Card(
+          color: Colors.white,
+          elevation: 4.0,
+          margin: const EdgeInsets.all(22.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
           ),
-          leading: Icon(Icons.person),
-          onTap: () => {Navigator.pushNamed(context, '/edituser')},
+          child: Column(
+            children: [
+              ListTile(
+                title: Text(
+                  'Settings',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Edit Profile',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.person),
+                onTap: () => {Navigator.pushNamed(context, '/edituser')},
+              ),
+              Divider(),
+              SwitchListTile(
+                title: Text(
+                  'Notifications',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                value: _notificationStatus,
+                onChanged: (bool value) {
+                  setState(() {
+                    _notificationStatus = value;
+                  });
+                },
+                activeColor: Color(0xFF78B389),
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Reset Entire Routine',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.refresh),
+                onTap: () => {Navigator.pushNamed(context, '/resetRoutine')},
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'My Subscription',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.credit_card),
+                onTap: () => {Navigator.pushNamed(context, '/payment')},
+              ),
+            ],
+          ),
         ),
-        ListTile(
-          title: Text(
-            'Payment',
-            style: Theme.of(context).textTheme.bodyMedium,
+        Card(
+          color: Colors.white,
+          elevation: 4.0,
+          margin: const EdgeInsets.all(22.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
           ),
-          leading: Icon(Icons.monetization_on),
-          onTap: () => {Navigator.pushNamed(context, '/payment')},
-        ),
-        SwitchListTile(
-          title: Text(
-            'Notifications',
-            style: Theme.of(context).textTheme.bodyMedium,
+          child: Column(
+            children: [
+              ListTile(
+                title: Text(
+                  'Help & Feedback',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Help Center',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.help),
+                onTap: () => {Navigator.pushNamed(context, '/subinfo')},
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Privacy Policy',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.privacy_tip),
+                onTap: () => {Navigator.pushNamed(context, '/privacyPolicy')},
+              ),
+              Divider(),
+              ListTile(
+                title: Text(
+                  'Terms and Policies',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                leading: Icon(Icons.description),
+                onTap: () =>
+                    {Navigator.pushNamed(context, '/termsAndPolicies')},
+              ),
+            ],
           ),
-          value: _notificationStatus,
-          onChanged: (bool value) {
-            setState(() {
-              _notificationStatus = value;
-            });
-          },
-          activeColor: Color(0xFF78B389),
-          inactiveTrackColor: Colors.white,
-        ),
-        ListTile(
-          title: Text(
-            'Reset Entire Routine',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          leading: Icon(Icons.refresh),
-        ),
-        ListTile(
-            title: Text(
-          'Help & Feedback',
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge
-              ?.copyWith(fontWeight: FontWeight.bold),
-        )),
-        ListTile(
-          title: Text(
-            'Help Center',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          leading: Icon(Icons.help),
-        ),
-        ListTile(
-          title: Text(
-            'Privacy Policy',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          leading: Icon(Icons.privacy_tip),
-        ),
-        ListTile(
-          title: Text(
-            'Terms and Policies',
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-          leading: Icon(Icons.description),
         ),
       ],
     );
