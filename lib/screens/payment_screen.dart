@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:fonepay_flutter/fonepay_flutter.dart';
 import 'package:flutter/foundation.dart';
@@ -29,7 +31,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pushReplacementNamed(context, '/main');
+            Navigator.of(context).popUntil((route) => route.isFirst);
+            Navigator.pushReplacementNamed(context, '/main', arguments: 3);
           },
         ),
       ),

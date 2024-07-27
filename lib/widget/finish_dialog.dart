@@ -15,6 +15,7 @@ void showFinishDialog(BuildContext context) {
             title: Text(
               'Finish?',
               style: TextStyle(
+                fontFamily: 'Euclid Circular A',
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
@@ -22,6 +23,7 @@ void showFinishDialog(BuildContext context) {
             content: Text(
               'Finished with mood track??',
               style: TextStyle(
+                fontFamily: 'Euclid Circular A',
                 fontSize: 16,
               ),
             ),
@@ -37,6 +39,7 @@ void showFinishDialog(BuildContext context) {
                 child: Text(
                   'No.',
                   style: TextStyle(
+                    fontFamily: 'Euclid Circular A',
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
@@ -56,6 +59,7 @@ void showFinishDialog(BuildContext context) {
                 child: Text(
                   'Finish!',
                   style: TextStyle(
+                    fontFamily: 'Euclid Circular A',
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),

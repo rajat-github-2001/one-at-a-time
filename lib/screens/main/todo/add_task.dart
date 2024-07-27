@@ -51,7 +51,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     icon: Image.asset('assets/icons/back.png')),
                 IconButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).popUntil((route) => route.isFirst);
+                      Navigator.pushReplacementNamed(context, '/main',
+                          arguments: 0);
                     },
                     icon: Image.asset('assets/icons/cross.png')),
               ],
@@ -227,21 +229,25 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             const SizedBox(
               height: 24,
             ),
-            !_showTimeSelection ? ElevatedButton(
-              onPressed: _submitTask,
-              style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(const Color(0XFF3B3EDE)),
-                  elevation: MaterialStateProperty.all(5),
-                  padding: MaterialStateProperty.all(const EdgeInsets.all(20)),
-                  shadowColor:
-                      MaterialStateProperty.all(Colors.black.withOpacity(0.5))),
-              child: const Text(
-                'Add Task',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ) : Container()
+            !_showTimeSelection
+                ? ElevatedButton(
+                    onPressed: _submitTask,
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                        elevation: MaterialStateProperty.all(5),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(20)),
+                        shadowColor: MaterialStateProperty.all(
+                            Colors.black.withOpacity(0.5))),
+                    child: const Text(
+                      'Add Task',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                : Container()
           ],
         ),
       ),
@@ -381,7 +387,8 @@ class _TimeSelectionWidgetState extends State<TimeSelectionWidget> {
                               controller: _startTimeController,
                               decoration: InputDecoration(
                                 filled: true,
-                                fillColor: const Color.fromARGB(255, 241, 231, 224),
+                                fillColor:
+                                    const Color.fromARGB(255, 241, 231, 224),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: BorderSide.none),
@@ -421,7 +428,8 @@ class _TimeSelectionWidgetState extends State<TimeSelectionWidget> {
                               controller: _endTimeController,
                               decoration: InputDecoration(
                                 filled: true,
-                                fillColor: const Color.fromARGB(255, 241, 231, 224),
+                                fillColor:
+                                    const Color.fromARGB(255, 241, 231, 224),
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     borderSide: BorderSide.none),

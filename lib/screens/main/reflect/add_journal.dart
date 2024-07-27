@@ -52,7 +52,8 @@ class _AddJournalState extends State<AddJournal> {
         isWritingWithPrompt = false;
       });
     } else {
-      Navigator.of(context).pop();
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.pushReplacementNamed(context, '/main', arguments: 2);
     }
   }
 
