@@ -37,7 +37,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
     });
   }
 
-    @override
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     final int? initialIndex =
@@ -70,6 +70,63 @@ class _ToDoScreenState extends State<ToDoScreen> {
         });
   }
 
+  void _showEditTaskModal(BuildContext context, Task task, int index) {
+    final _titleController = TextEditingController(text: task.title);
+    final _subtitleController = TextEditingController(text: task.subtitle);
+    String? _selectedEmoji = task.emoji;
+
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return FractionallySizedBox(
+          heightFactor: 0.8,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                ),
+                TextField(
+                  controller: _subtitleController,
+                  decoration: const InputDecoration(labelText: 'Subtitle'),
+                ),
+                SizedBox(height: 16,),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _tasks[index] = Task(
+                        title: _titleController.text,
+                        subtitle: _subtitleController.text,
+                        emoji: _selectedEmoji ?? task.emoji,
+                      );
+                    });
+                    Navigator.of(context).pop();
+                  },
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(const Color(0XFF3B3EDE)),
+                      elevation: MaterialStateProperty.all(5),
+                      padding:
+                          MaterialStateProperty.all(const EdgeInsets.all(20)),
+                      shadowColor: MaterialStateProperty.all(
+                          Colors.black.withOpacity(0.5))),
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +136,7 @@ class _ToDoScreenState extends State<ToDoScreen> {
                 tasks: _tasks,
                 addTask: _addTask,
                 toggleTaskCompletion: _toggleTaskCompletion,
+                showEditTaskModal: _showEditTaskModal,
               )
             : _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -102,7 +160,10 @@ class _ToDoScreenState extends State<ToDoScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     MainContent(
-        tasks: const [], addTask: (task) {}, toggleTaskCompletion: (index) {}),
+        tasks: const [],
+        addTask: (task) {},
+        toggleTaskCompletion: (index) {},
+        showEditTaskModal: (context, task, index) {}),
     const MoodTrackScreen(),
     const ReflectScreen(),
     const UserProfileScreen(),
@@ -113,11 +174,13 @@ class MainContent extends StatefulWidget {
   final List<Task> tasks;
   final Function(Task) addTask;
   final Function(int) toggleTaskCompletion;
+  final Function(BuildContext, Task, int) showEditTaskModal;
 
   const MainContent({
     required this.tasks,
     required this.addTask,
     required this.toggleTaskCompletion,
+    required this.showEditTaskModal,
     super.key,
   });
 
@@ -279,13 +342,24 @@ class _MainContentState extends State<MainContent> {
               task.emoji,
               style: const TextStyle(fontSize: 24),
             ),
-            trailing: IconButton(
-              icon: task.isCompleted
-                  ? const Icon(Icons.check_circle, color: Colors.green)
-                  : const Icon(Icons.radio_button_unchecked),
-              onPressed: () {
-                widget.toggleTaskCompletion(index);
-              },
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    widget.showEditTaskModal(context, task, index);
+                  },
+                ),
+                IconButton(
+                  icon: task.isCompleted
+                      ? const Icon(Icons.check_circle, color: Colors.green)
+                      : const Icon(Icons.radio_button_unchecked),
+                  onPressed: () {
+                    widget.toggleTaskCompletion(index);
+                  },
+                ),
+              ],
             ),
             title: Text(
               task.title,
